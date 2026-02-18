@@ -1,0 +1,72 @@
+{
+  "gameId": "firered",
+  "routes": [
+    { "id": "pallet-town", "name": "Pallet Town", "types": ["town"], "order": 1, "phase": "main" },
+    { "id": "route-1", "name": "Route 1", "types": ["route"], "order": 2, "phase": "main" },
+    { "id": "viridian-city", "name": "Viridian City", "types": ["city"], "order": 3, "phase": "main" },
+    { "id": "route-22", "name": "Route 22", "types": ["route"], "order": 4, "phase": "main" },
+    { "id": "route-2", "name": "Route 2", "types": ["route"], "order": 5, "phase": "main" },
+    { "id": "viridian-forest", "name": "Viridian Forest", "types": ["forest"], "order": 6, "phase": "main" },
+    { "id": "pewter-city", "name": "Pewter City", "types": ["city"], "order": 7, "phase": "main" },
+    { "id": "route-3", "name": "Route 3", "types": ["route"], "order": 8, "phase": "main" },
+    { "id": "mt-moon", "name": "Mt. Moon", "types": ["cave","dungeon"], "order": 9, "phase": "main" },
+    { "id": "route-4", "name": "Route 4", "types": ["route"], "order": 10, "phase": "main" },
+    { "id": "cerulean-city", "name": "Cerulean City", "types": ["city"], "order": 11, "phase": "main" },
+    { "id": "route-24", "name": "Route 24", "types": ["route"], "order": 12, "phase": "main" },
+    { "id": "route-25", "name": "Route 25", "types": ["route"], "order": 13, "phase": "main" },
+    { "id": "route-5", "name": "Route 5", "types": ["route"], "order": 14, "phase": "main" },
+    { "id": "route-6", "name": "Route 6", "types": ["route"], "order": 15, "phase": "main" },
+    { "id": "vermillion-city", "name": "Vermillion City", "types": ["city"], "order": 16, "phase": "main" },
+    { "id": "route-11", "name": "Route 11", "types": ["route"], "order": 17, "phase": "main" },
+    { "id": "digletts-cave", "name": "Diglett's Cave", "types": ["cave"], "order": 18, "phase": "main" },
+    { "id": "route-9", "name": "Route 9", "types": ["route"], "order": 19, "phase": "main" },
+    { "id": "route-10", "name": "Route 10", "types": ["route"], "order": 20, "phase": "main" },
+    { "id": "rock tunnel", "name": "Rock Tunnel", "types": ["cave","dungeon"], "order": 21, "phase": "main" },
+
+    { "id": "lavender-town", "name": "Lavender Town", "types": ["town"], "order": 22, "phase": "main" },
+    { "id": "pokemon-tower", "name": "Pokémon Tower", "types": ["building","dungeon"], "order": 23, "phase": "main" },
+
+    { "id": "route-12", "name": "Route 12", "types": ["route"], "order": 24, "phase": "main" },
+    { "id": "route-8", "name": "Route 8", "types": ["route"], "order": 25, "phase": "main" },
+    { "id": "route-7", "name": "Route 7", "types": ["route"], "order": 26, "phase": "main" },
+    { "id": "celadon-city", "name": "Celadon City", "types": ["city"], "order": 27, "phase": "main" },
+
+    { "id": "rocket-hideout", "name": "Rocket Hideout", "types": ["building", "dungeon"], "order": 28, "phase": "main" },
+
+    { "id": "Saffron-City", "name": "Saffron City", "types": ["city"], "order": 29, "phase": "main" },
+    { "id": "silph-co", "name": "Silph Co.", "types": ["building", "dungeon"], "order": 30, "phase": "main" },
+
+    { "id": "route-16", "name": "Route 16", "types": ["route"], "order": 31, "phase": "main" },
+    { "id": "route-17", "name": "Route 17", "types": ["route"], "order": 32, "phase": "main" },
+    { "id": "route-18", "name": "Route 18", "types": ["route"], "order": 33, "phase": "main" },
+    { "id": "fuschia-city", "name": "Fuschia City", "types": ["city"], "order": 34, "phase": "main" },
+    { "id": "safari-zone", "name": "Safari Zone", "types": ["special"], "order": 35, "phase": "main" },
+    { "id": "route-15", "name": "Route 15", "types": ["route"], "order": 36, "phase": "main" },
+    { "id": "route-14", "name": "Route 14", "types": ["route"], "order": 37, "phase": "main" },
+    { "id": "route-13", "name": "Route 13", "types": ["route"], "order": 38, "phase": "main" },
+    { "id": "power-plant", "name": "Power Plant", "types": ["building", "dungeon"], "order": 39, "phase": "main" },
+    { "id": "route-19", "name": "Route 19", "types": ["route"], "order": 40, "phase": "main" },
+    { "id": "route-20", "name": "Route 20", "types": ["route"], "order": 41, "phase": "main" },
+    { "id": "seafoam-islands", "name": "Seafoam Islands", "types": ["cave", "dungeon"], "order": 42, "phase": "main" },
+    { "id": "cinnabar-island", "name": "Cinnabar Island", "types": ["island", "city"], "order": 43, "phase": "main" },
+    { "id": "pokemon-mansion", "name": "Pokémon Mansion", "types": ["building", "dungeon"], "order": 44, "phase": "main" },
+
+    { "id": "one-island", "name": "One Island", "types": ["island", "city"], "order": 45, "phase": "main" },
+    { "id": "two-island", "name": "Two Island", "types": ["island", "city"], "order": 46, "phase": "main" },
+    { "id": "three-island", "name": "Three Island", "types": ["island", "city"], "order": 47, "phase": "main" },
+
+    { "id": "route-21", "name": "Route 21", "types": ["route"], "order": 48, "phase": "main" },
+    { "id": "route-23", "name": "Route 23", "types": ["route"], "order": 49, "phase": "main" },
+
+    { "id": "indigo-plateau", "name": "Indigo Plateau", "types": ["city", "special"], "order": 50, "phase": "main" },
+
+    { "id": "victory-road", "name": "Victory Road", "types": ["cave", "dungeon"], "order": 51, "phase": "main" },
+
+    { "id": "four-island", "name": "Four Island", "types": ["island", "city"], "order": 52, "phase": "postgame" },
+    { "id": "five-island", "name": "Five Island", "types": ["island", "city"], "order": 53, "phase": "postgame" },
+    { "id": "six-island", "name": "Six Island", "types": ["island", "city"], "order": 54, "phase": "postgame" },
+    { "id": "seven-island", "name": "Seven Island", "types": ["island", "city"], "order": 55, "phase": "postgame" },
+
+    { "id": "cerulean-cave", "name": "Cerulean Cave", "types": ["cave", "dungeon"], "order": 56, "phase": "postgame" }
+  ]
+}
