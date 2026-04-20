@@ -1,9 +1,27 @@
-import { View, Text } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
-export default function RunListScreen() {
+export default function RunListScreen({ navigation }) {
   return (
-    <View>
-      <Text>Run List Screen</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Run List Screen</Text>
+      <Button
+        title="Go to Routes"
+        onPress={() => navigation.navigate('Routes')}
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 28,
+    marginBottom: 20,
+  },
+});
