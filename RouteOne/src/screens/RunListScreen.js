@@ -5,9 +5,9 @@ export default function RunListScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>Run List Screen</Text>
       <Button
-        title="Go to Routes"
-        onPress={() => navigation.navigate('Routes')}
-      />
+        title="Open Run"
+        onPress={() => navigation.navigate('RunTabs')}
+    />
     </View>
   );
 }
