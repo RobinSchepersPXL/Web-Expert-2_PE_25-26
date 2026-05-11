@@ -1,14 +1,72 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function RouteDetailScreen({ route }) {
   const { routeItem } = route.params;
+
+  const [pokemonName, setPokemonName] = useState('');
+  const [encounter, setEncounter] = useState(null);
+
+  const STORAGE_KEY = 'encounters';
+
+  // 🔹 Load bij openen
+  useEffect(() => {
+    loadEncounter();
+  }, []);
+
+  const loadEncounter = async () => {
+    try {
+      const data = await AsyncStorage.getItem(STORAGE_KEY);
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (parsed[routeItem.id]) {
+          setEncounter(parsed[routeItem.id]);
+        }
+      }
+    } catch (e) {
+      console.log('Error loading', e);
+    }
+  };
+
+  // 🔹 Opslaan
+  const addEncounter = async () => {
+    if (!pokemonName) return;
+
+    try {
+      const data = await AsyncStorage.getItem(STORAGE_KEY);
+      const parsed = data ? JSON.parse(data) : {};
+
+      parsed[routeItem.id] = pokemonName;
+
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+
+      setEncounter(pokemonName);
+      setPokemonName('');
+    } catch (e) {
+      console.log('Error saving', e);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{routeItem.name}</Text>
       <Text style={styles.meta}>{routeItem.types.join(', ')}</Text>
-      <Text style={styles.phase}>Phase: {routeItem.phase}</Text>
-      <Text style={styles.empty}>Nog geen encounter toegevoegd.</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Pokémon name"
+        value={pokemonName}
+        onChangeText={setPokemonName}
+      />
+
+      <Button title="Add Encounter" onPress={addEncounter} />
+
+      {encounter && (
+        <Text style={styles.result}>
+          Encounter: {encounter}
+        </Text>
+      )}
     </View>
   );
 }
@@ -26,13 +84,17 @@ const styles = StyleSheet.create({
   },
   meta: {
     color: '#666',
-    marginBottom: 4,
+    marginBottom: 20,
   },
-  phase: {
-    color: '#666',
-    marginBottom: 24,
+  input: {
+    backgroundColor: '#fff',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 10,
   },
-  empty: {
-    fontSize: 16,
+  result: {
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: '600',
   },
 });
