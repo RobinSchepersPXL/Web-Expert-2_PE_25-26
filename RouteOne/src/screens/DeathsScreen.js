@@ -5,22 +5,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import fireRedRoutes from '../data/firered_routes.json';
 
-export default function BoxScreen() {
-  const [boxPokemon, setBoxPokemon] = useState([]);
+export default function DeathsScreen() {
+  const [deadPokemon, setDeadPokemon] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
-      loadBoxPokemon();
+      loadDeadPokemon();
     }, [])
   );
 
-  const loadBoxPokemon = async () => {
+  const loadDeadPokemon = async () => {
     try {
       const data = await AsyncStorage.getItem('encounters');
       const encounters = data ? JSON.parse(data) : {};
 
-      const caughtPokemon = Object.entries(encounters)
-        .filter(([_, encounter]) => encounter.status === 'caught')
+      const deaths = Object.entries(encounters)
+        .filter(([_, encounter]) => encounter.status === 'dead')
         .map(([routeId, encounter]) => {
           const route = fireRedRoutes.routes.find((item) => item.id === routeId);
 
@@ -31,21 +31,21 @@ export default function BoxScreen() {
           };
         });
 
-      setBoxPokemon(caughtPokemon);
+      setDeadPokemon(deaths);
     } catch (e) {
-      console.log('Error loading box pokemon', e);
+      console.log('Error loading dead pokemon', e);
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Box</Text>
+      <Text style={styles.title}>Graveyard</Text>
 
-      {boxPokemon.length === 0 ? (
-        <Text style={styles.empty}>No caught Pokémon yet.</Text>
+      {deadPokemon.length === 0 ? (
+        <Text style={styles.empty}>No dead Pokémon yet.</Text>
       ) : (
         <FlatList
-          data={boxPokemon}
+          data={deadPokemon}
           keyExtractor={(item) => item.routeId}
           renderItem={({ item }) => (
             <View style={styles.card}>

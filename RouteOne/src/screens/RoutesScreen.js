@@ -1,9 +1,28 @@
 import { FlatList, Text, View, StyleSheet, Pressable } from 'react-native';
+import { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import fireRedRoutes from '../data/firered_routes.json';
 
 export default function RoutesScreen({ navigation }) {
   const routes = fireRedRoutes.routes.sort((a, b) => a.order - b.order);
+  const [encounters, setEncounters] = useState({});
+
+  useFocusEffect(
+    useCallback(() => {
+      loadEncounters();
+    }, [])
+  );
+
+  const loadEncounters = async () => {
+    try {
+      const data = await AsyncStorage.getItem('encounters');
+      setEncounters(data ? JSON.parse(data) : {});
+    } catch (e) {
+      console.log('Error loading encounters', e);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -12,19 +31,32 @@ export default function RoutesScreen({ navigation }) {
       <FlatList
         data={routes}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Pressable
-            style={styles.card}
-            onPress={() =>
-              navigation.navigate('RouteDetail', { routeItem: item })
-            }
-          >
-            <Text style={styles.routeName}>{item.name}</Text>
-            <Text style={styles.meta}>
-              {item.types.join(', ')} • {item.phase}
-            </Text>
-          </Pressable>
-        )}
+        renderItem={({ item }) => {
+          const encounter = encounters[item.id];
+
+          return (
+            <Pressable
+              style={styles.card}
+              onPress={() =>
+                navigation.navigate('RouteDetail', { routeItem: item })
+              }
+            >
+              <Text style={styles.routeName}>{item.name}</Text>
+
+              <Text style={styles.meta}>
+                {item.types.join(', ')} • {item.phase}
+              </Text>
+
+              {encounter ? (
+                <Text style={styles.encounter}>
+                  Encounter: {encounter.pokemon} ({encounter.status})
+                </Text>
+              ) : (
+                <Text style={styles.empty}>No encounter yet</Text>
+              )}
+            </Pressable>
+          );
+        }}
       />
     </View>
   );
@@ -54,5 +86,13 @@ const styles = StyleSheet.create({
   meta: {
     marginTop: 4,
     color: '#666',
+  },
+  encounter: {
+    marginTop: 8,
+    fontWeight: '600',
+  },
+  empty: {
+    marginTop: 8,
+    color: '#999',
   },
 });
