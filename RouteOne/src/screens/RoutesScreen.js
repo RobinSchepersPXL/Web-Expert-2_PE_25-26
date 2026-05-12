@@ -2,6 +2,7 @@ import { FlatList, Text, View, StyleSheet, Pressable } from 'react-native';
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FlatList, Text, View, StyleSheet, Pressable, Image } from 'react-native';
 
 import fireRedRoutes from '../data/firered_routes.json';
 
