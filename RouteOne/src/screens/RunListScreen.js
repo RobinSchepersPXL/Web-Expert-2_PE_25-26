@@ -4,10 +4,11 @@ export default function RunListScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Run List Screen</Text>
+
       <Button
         title="Open Run"
-        onPress={() => navigation.navigate('RunTabs')}
-    />
+        onPress={() => navigation.navigate('AppDrawer')}
+      />
     </View>
   );
 }
