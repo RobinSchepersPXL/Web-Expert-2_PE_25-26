@@ -15,8 +15,9 @@ export default function AppDrawer({ onLogout }) {
       />
 
       <Drawer.Screen name="Settings">
-        {() => (
+        {(props) => (
           <SettingsScreen
+            {...props}
             onLogout={onLogout}
           />
         )}

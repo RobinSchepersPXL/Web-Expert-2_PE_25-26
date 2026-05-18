@@ -1,175 +1,1127 @@
 {
-    "gameId": "firered",
-    "caps": [
-      {
-        "id": "brock",
-        "name": "Brock",
-        "location": "Pewter Gym",
-        "cap": 14,
-        "order": 1,
-        "team": [
-          { "pokemonId": 74, "name": "Geodude", "level": 12 },
-          { "pokemonId": 95, "name": "Onix", "level": 14 }
-        ]
-      },
-      {
-        "id": "misty",
-        "name": "Misty",
-        "location": "Cerulean Gym",
-        "cap": 21,
-        "order": 2,
-        "team": [
-          { "pokemonId": 120, "name": "Staryu", "level": 18 },
-          { "pokemonId": 121, "name": "Starmie", "level": 21 }
-        ]
-      },
-      {
-        "id": "lt-surge",
-        "name": "Lt. Surge",
-        "location": "Vermilion Gym",
-        "cap": 24,
-        "order": 3,
-        "team": [
-          { "pokemonId": 100, "name": "Voltorb", "level": 21 },
-          { "pokemonId": 25, "name": "Pikachu", "level": 18 },
-          { "pokemonId": 26, "name": "Raichu", "level": 24 }
-        ]
-      },
-      {
-        "id": "erika",
-        "name": "Erika",
-        "location": "Celadon Gym",
-        "cap": 29,
-        "order": 4,
-        "team": [
-          { "pokemonId": 114, "name": "Tangela", "level": 24 },
-          { "pokemonId": 44, "name": "Gloom", "level": 29 },
-          { "pokemonId": 45, "name": "Vileplume", "level": 29 }
-        ]
-      },
-      {
-        "id": "koga",
-        "name": "Koga",
-        "location": "Fuchsia Gym",
-        "cap": 43,
-        "order": 5,
-        "team": [
-          { "pokemonId": 109, "name": "Koffing", "level": 37 },
-          { "pokemonId": 109, "name": "Koffing", "level": 37 },
-          { "pokemonId": 110, "name": "Weezing", "level": 43 },
-          { "pokemonId": 49, "name": "Venomoth", "level": 38 }
-        ]
-      },
-      {
-        "id": "sabrina",
-        "name": "Sabrina",
-        "location": "Saffron Gym",
-        "cap": 43,
-        "order": 6,
-        "team": [
-          { "pokemonId": 64, "name": "Kadabra", "level": 38 },
-          { "pokemonId": 122, "name": "Mr. Mime", "level": 37 },
-          { "pokemonId": 49, "name": "Venomoth", "level": 38 },
-          { "pokemonId": 65, "name": "Alakazam", "level": 43 }
-        ]
-      },
-      {
-        "id": "blaine",
-        "name": "Blaine",
-        "location": "Cinnabar Gym",
-        "cap": 47,
-        "order": 7,
-        "team": [
-          { "pokemonId": 58, "name": "Growlithe", "level": 42 },
-          { "pokemonId": 77, "name": "Ponyta", "level": 40 },
-          { "pokemonId": 78, "name": "Rapidash", "level": 42 },
-          { "pokemonId": 59, "name": "Arcanine", "level": 47 }
-        ]
-      },
-      {
-        "id": "giovanni",
-        "name": "Giovanni",
-        "location": "Viridian Gym",
-        "cap": 50,
-        "order": 8,
-        "team": [
-          { "pokemonId": 111, "name": "Rhyhorn", "level": 45 },
-          { "pokemonId": 51, "name": "Dugtrio", "level": 42 },
-          { "pokemonId": 31, "name": "Nidoqueen", "level": 44 },
-          { "pokemonId": 34, "name": "Nidoking", "level": 45 },
-          { "pokemonId": 112, "name": "Rhydon", "level": 50 }
-        ]
-      },
-      {
-        "id": "elite-four-lorelei",
-        "name": "Lorelei",
-        "location": "Indigo Plateau",
-        "cap": 54,
-        "order": 9,
-        "team": [
-          { "pokemonId": 87, "name": "Dewgong", "level": 52 },
-          { "pokemonId": 91, "name": "Cloyster", "level": 51 },
-          { "pokemonId": 80, "name": "Slowbro", "level": 52 },
-          { "pokemonId": 124, "name": "Jynx", "level": 54 },
-          { "pokemonId": 131, "name": "Lapras", "level": 54 }
-        ]
-      },
-      {
-        "id": "elite-four-bruno",
-        "name": "Bruno",
-        "location": "Indigo Plateau",
-        "cap": 56,
-        "order": 10,
-        "team": [
-          { "pokemonId": 95, "name": "Onix", "level": 51 },
-          { "pokemonId": 106, "name": "Hitmonlee", "level": 53 },
-          { "pokemonId": 107, "name": "Hitmonchan", "level": 53 },
-          { "pokemonId": 95, "name": "Onix", "level": 54 },
-          { "pokemonId": 68, "name": "Machamp", "level": 56 }
-        ]
-      },
-      {
-        "id": "elite-four-agatha",
-        "name": "Agatha",
-        "location": "Indigo Plateau",
-        "cap": 58,
-        "order": 11,
-        "team": [
-          { "pokemonId": 94, "name": "Gengar", "level": 54 },
-          { "pokemonId": 42, "name": "Golbat", "level": 54 },
-          { "pokemonId": 93, "name": "Haunter", "level": 53 },
-          { "pokemonId": 24, "name": "Arbok", "level": 56 },
-          { "pokemonId": 94, "name": "Gengar", "level": 58 }
-        ]
-      },
-      {
-        "id": "elite-four-lance",
-        "name": "Lance",
-        "location": "Indigo Plateau",
-        "cap": 60,
-        "order": 12,
-        "team": [
-          { "pokemonId": 130, "name": "Gyarados", "level": 56 },
-          { "pokemonId": 148, "name": "Dragonair", "level": 54 },
-          { "pokemonId": 148, "name": "Dragonair", "level": 54 },
-          { "pokemonId": 142, "name": "Aerodactyl", "level": 58 },
-          { "pokemonId": 149, "name": "Dragonite", "level": 60 }
-        ]
-      },
-      {
-        "id": "champion-blue",
-        "name": "Champion Blue",
-        "location": "Indigo Plateau",
-        "cap": 63,
-        "order": 13,
-        "team": [
-          { "pokemonId": 18, "name": "Pidgeot", "level": 59 },
-          { "pokemonId": 65, "name": "Alakazam", "level": 57 },
-          { "pokemonId": 112, "name": "Rhydon", "level": 59 },
-          { "pokemonId": 130, "name": "Gyarados", "level": 61 },
-          { "pokemonId": 59, "name": "Arcanine", "level": 59 },
-          { "pokemonId": 9, "name": "Blastoise", "level": 63 }
-        ]
-      }
-    ]
-  }
+  "gameId": "firered",
+  "caps": [
+    {
+      "id": "brock",
+      "name": "Brock",
+      "location": "Pewter Gym",
+      "cap": 14,
+      "order": 1,
+      "team": [
+        {
+          "pokemonId": 74,
+          "name": "Geodude",
+          "level": 12,
+          "moves": [
+            "Defense Curl",
+            "Tackle"
+          ],
+          "baseStats": {
+            "hp": 40,
+            "attack": 80,
+            "defense": 100,
+            "specialAttack": 30,
+            "specialDefense": 30,
+            "speed": 20
+          }
+        },
+        {
+          "pokemonId": 95,
+          "name": "Onix",
+          "level": 14,
+          "moves": [
+            "Bind",
+            "Harden",
+            "Rock Tomb",
+            "Tackle"
+          ],
+          "baseStats": {
+            "hp": 35,
+            "attack": 45,
+            "defense": 160,
+            "specialAttack": 30,
+            "specialDefense": 45,
+            "speed": 70
+          }
+        }
+      ]
+    },
+    {
+      "id": "misty",
+      "name": "Misty",
+      "location": "Cerulean Gym",
+      "cap": 21,
+      "order": 2,
+      "team": [
+        {
+          "pokemonId": 120,
+          "name": "Staryu",
+          "level": 18,
+          "moves": [
+            "Harden",
+            "Recover",
+            "Tackle",
+            "Water Pulse"
+          ],
+          "baseStats": {
+            "hp": 30,
+            "attack": 45,
+            "defense": 55,
+            "specialAttack": 70,
+            "specialDefense": 55,
+            "speed": 85
+          }
+        },
+        {
+          "pokemonId": 121,
+          "name": "Starmie",
+          "level": 21,
+          "moves": [
+            "Rapid Spin",
+            "Recover",
+            "Swift",
+            "Water Pulse"
+          ],
+          "baseStats": {
+            "hp": 60,
+            "attack": 75,
+            "defense": 85,
+            "specialAttack": 100,
+            "specialDefense": 85,
+            "speed": 115
+          }
+        }
+      ]
+    },
+    {
+      "id": "lt-surge",
+      "name": "Lt. Surge",
+      "location": "Vermilion Gym",
+      "cap": 24,
+      "order": 3,
+      "team": [
+        {
+          "pokemonId": 100,
+          "name": "Voltorb",
+          "level": 21,
+          "moves": [
+            "Screech",
+            "Shock Wave",
+            "Sonic Boom",
+            "Tackle"
+          ],
+          "baseStats": {
+            "hp": 40,
+            "attack": 30,
+            "defense": 50,
+            "specialAttack": 55,
+            "specialDefense": 55,
+            "speed": 100
+          }
+        },
+        {
+          "pokemonId": 25,
+          "name": "Pikachu",
+          "level": 18,
+          "moves": [
+            "Double Team",
+            "Quick Attack",
+            "Shock Wave",
+            "Thunder Wave"
+          ],
+          "baseStats": {
+            "hp": 35,
+            "attack": 55,
+            "defense": 40,
+            "specialAttack": 50,
+            "specialDefense": 50,
+            "speed": 90
+          }
+        },
+        {
+          "pokemonId": 26,
+          "name": "Raichu",
+          "level": 24,
+          "moves": [
+            "Double Team",
+            "Quick Attack",
+            "Shock Wave",
+            "Thunder Wave"
+          ],
+          "baseStats": {
+            "hp": 60,
+            "attack": 90,
+            "defense": 55,
+            "specialAttack": 90,
+            "specialDefense": 80,
+            "speed": 110
+          }
+        }
+      ]
+    },
+    {
+      "id": "erika",
+      "name": "Erika",
+      "location": "Celadon Gym",
+      "cap": 29,
+      "order": 4,
+      "team": [
+        {
+          "pokemonId": 71,
+          "name": "Victreebel",
+          "level": 29,
+          "moves": [
+            "Acid",
+            "Giga Drain",
+            "Poison Powder",
+            "Stun Spore"
+          ],
+          "baseStats": {
+            "hp": 80,
+            "attack": 105,
+            "defense": 65,
+            "specialAttack": 100,
+            "specialDefense": 70,
+            "speed": 70
+          }
+        },
+        {
+          "pokemonId": 114,
+          "name": "Tangela",
+          "level": 24,
+          "moves": [
+            "Constrict",
+            "Giga Drain",
+            "Ingrain",
+            "Poison Powder"
+          ],
+          "baseStats": {
+            "hp": 65,
+            "attack": 55,
+            "defense": 115,
+            "specialAttack": 100,
+            "specialDefense": 40,
+            "speed": 60
+          }
+        },
+        {
+          "pokemonId": 45,
+          "name": "Vileplume",
+          "level": 29,
+          "moves": [
+            "Acid",
+            "Giga Drain",
+            "Sleep Powder",
+            "Stun Spore"
+          ],
+          "baseStats": {
+            "hp": 75,
+            "attack": 80,
+            "defense": 85,
+            "specialAttack": 110,
+            "specialDefense": 90,
+            "speed": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "koga",
+      "name": "Koga",
+      "location": "Fuchsia Gym",
+      "cap": 43,
+      "order": 5,
+      "team": [
+        {
+          "pokemonId": 109,
+          "name": "Koffing",
+          "level": 37,
+          "moves": [
+            "Self-Destruct",
+            "Sludge",
+            "Smokescreen",
+            "Toxic"
+          ],
+          "baseStats": {
+            "hp": 40,
+            "attack": 65,
+            "defense": 95,
+            "specialAttack": 60,
+            "specialDefense": 45,
+            "speed": 35
+          }
+        },
+        {
+          "pokemonId": 109,
+          "name": "Koffing",
+          "level": 37,
+          "moves": [
+            "Self-Destruct",
+            "Sludge",
+            "Smokescreen",
+            "Toxic"
+          ],
+          "baseStats": {
+            "hp": 40,
+            "attack": 65,
+            "defense": 95,
+            "specialAttack": 60,
+            "specialDefense": 45,
+            "speed": 35
+          }
+        },
+        {
+          "pokemonId": 89,
+          "name": "Muk",
+          "level": 39,
+          "moves": [
+            "Acid Armor",
+            "Minimize",
+            "Sludge",
+            "Toxic"
+          ],
+          "baseStats": {
+            "hp": 105,
+            "attack": 105,
+            "defense": 75,
+            "specialAttack": 65,
+            "specialDefense": 100,
+            "speed": 50
+          }
+        },
+        {
+          "pokemonId": 110,
+          "name": "Weezing",
+          "level": 43,
+          "moves": [
+            "Sludge",
+            "Smokescreen",
+            "Tackle",
+            "Toxic"
+          ],
+          "baseStats": {
+            "hp": 65,
+            "attack": 90,
+            "defense": 120,
+            "specialAttack": 85,
+            "specialDefense": 70,
+            "speed": 60
+          }
+        }
+      ]
+    },
+    {
+      "id": "sabrina",
+      "name": "Sabrina",
+      "location": "Saffron Gym",
+      "cap": 43,
+      "order": 6,
+      "team": [
+        {
+          "pokemonId": 64,
+          "name": "Kadabra",
+          "level": 38,
+          "moves": [
+            "Calm Mind",
+            "Future Sight",
+            "Psybeam",
+            "Reflect"
+          ],
+          "baseStats": {
+            "hp": 40,
+            "attack": 35,
+            "defense": 30,
+            "specialAttack": 120,
+            "specialDefense": 70,
+            "speed": 105
+          }
+        },
+        {
+          "pokemonId": 122,
+          "name": "Mr. Mime",
+          "level": 37,
+          "moves": [
+            "Barrier",
+            "Baton Pass",
+            "Calm Mind",
+            "Psybeam"
+          ],
+          "baseStats": {
+            "hp": 40,
+            "attack": 45,
+            "defense": 65,
+            "specialAttack": 100,
+            "specialDefense": 120,
+            "speed": 90
+          }
+        },
+        {
+          "pokemonId": 49,
+          "name": "Venomoth",
+          "level": 38,
+          "moves": [
+            "Gust",
+            "Leech Life",
+            "Psybeam",
+            "Supersonic"
+          ],
+          "baseStats": {
+            "hp": 70,
+            "attack": 65,
+            "defense": 60,
+            "specialAttack": 90,
+            "specialDefense": 75,
+            "speed": 90
+          }
+        },
+        {
+          "pokemonId": 65,
+          "name": "Alakazam",
+          "level": 43,
+          "moves": [
+            "Calm Mind",
+            "Future Sight",
+            "Psychic",
+            "Recover"
+          ],
+          "baseStats": {
+            "hp": 55,
+            "attack": 50,
+            "defense": 45,
+            "specialAttack": 135,
+            "specialDefense": 95,
+            "speed": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": "blaine",
+      "name": "Blaine",
+      "location": "Cinnabar Gym",
+      "cap": 47,
+      "order": 7,
+      "team": [
+        {
+          "pokemonId": 58,
+          "name": "Growlithe",
+          "level": 42,
+          "moves": [
+            "Bite",
+            "Fire Blast",
+            "Roar",
+            "Take Down"
+          ],
+          "baseStats": {
+            "hp": 55,
+            "attack": 70,
+            "defense": 45,
+            "specialAttack": 70,
+            "specialDefense": 50,
+            "speed": 60
+          }
+        },
+        {
+          "pokemonId": 77,
+          "name": "Ponyta",
+          "level": 40,
+          "moves": [
+            "Bounce",
+            "Fire Blast",
+            "Fire Spin",
+            "Stomp"
+          ],
+          "baseStats": {
+            "hp": 50,
+            "attack": 85,
+            "defense": 55,
+            "specialAttack": 65,
+            "specialDefense": 65,
+            "speed": 90
+          }
+        },
+        {
+          "pokemonId": 78,
+          "name": "Rapidash",
+          "level": 42,
+          "moves": [
+            "Bounce",
+            "Fire Blast",
+            "Fire Spin",
+            "Stomp"
+          ],
+          "baseStats": {
+            "hp": 65,
+            "attack": 100,
+            "defense": 70,
+            "specialAttack": 80,
+            "specialDefense": 80,
+            "speed": 105
+          }
+        },
+        {
+          "pokemonId": 59,
+          "name": "Arcanine",
+          "level": 47,
+          "moves": [
+            "Bite",
+            "Fire Blast",
+            "Roar",
+            "Take Down"
+          ],
+          "baseStats": {
+            "hp": 90,
+            "attack": 110,
+            "defense": 80,
+            "specialAttack": 100,
+            "specialDefense": 80,
+            "speed": 95
+          }
+        }
+      ]
+    },
+    {
+      "id": "giovanni",
+      "name": "Giovanni",
+      "location": "Viridian Gym",
+      "cap": 50,
+      "order": 8,
+      "team": [
+        {
+          "pokemonId": 111,
+          "name": "Rhyhorn",
+          "level": 45,
+          "moves": [
+            "Earthquake",
+            "Rock Blast",
+            "Scary Face",
+            "Take Down"
+          ],
+          "baseStats": {
+            "hp": 80,
+            "attack": 85,
+            "defense": 95,
+            "specialAttack": 30,
+            "specialDefense": 30,
+            "speed": 25
+          }
+        },
+        {
+          "pokemonId": 51,
+          "name": "Dugtrio",
+          "level": 42,
+          "moves": [
+            "Earthquake",
+            "Mud-Slap",
+            "Sand Tomb",
+            "Slash"
+          ],
+          "baseStats": {
+            "hp": 35,
+            "attack": 80,
+            "defense": 50,
+            "specialAttack": 50,
+            "specialDefense": 70,
+            "speed": 120
+          }
+        },
+        {
+          "pokemonId": 31,
+          "name": "Nidoqueen",
+          "level": 44,
+          "moves": [
+            "Body Slam",
+            "Double Kick",
+            "Earthquake",
+            "Poison Sting"
+          ],
+          "baseStats": {
+            "hp": 90,
+            "attack": 92,
+            "defense": 87,
+            "specialAttack": 75,
+            "specialDefense": 85,
+            "speed": 76
+          }
+        },
+        {
+          "pokemonId": 34,
+          "name": "Nidoking",
+          "level": 45,
+          "moves": [
+            "Double Kick",
+            "Earthquake",
+            "Poison Sting",
+            "Thrash"
+          ],
+          "baseStats": {
+            "hp": 81,
+            "attack": 102,
+            "defense": 77,
+            "specialAttack": 85,
+            "specialDefense": 75,
+            "speed": 85
+          }
+        },
+        {
+          "pokemonId": 111,
+          "name": "Rhyhorn",
+          "level": 50,
+          "moves": [
+            "Earthquake",
+            "Rock Blast",
+            "Scary Face",
+            "Take Down"
+          ],
+          "baseStats": {
+            "hp": 80,
+            "attack": 85,
+            "defense": 95,
+            "specialAttack": 30,
+            "specialDefense": 30,
+            "speed": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "elite-four-lorelei",
+      "name": "Lorelei",
+      "location": "Indigo Plateau",
+      "cap": 54,
+      "order": 9,
+      "team": [
+        {
+          "pokemonId": 87,
+          "name": "Dewgong",
+          "level": 52,
+          "moves": [
+            "Surf",
+            "Ice Beam",
+            "Hail",
+            "Safeguard"
+          ],
+          "baseStats": {
+            "hp": 90,
+            "attack": 70,
+            "defense": 80,
+            "specialAttack": 70,
+            "specialDefense": 95,
+            "speed": 70
+          }
+        },
+        {
+          "pokemonId": 91,
+          "name": "Cloyster",
+          "level": 51,
+          "moves": [
+            "Spikes",
+            "Dive",
+            "Hail",
+            "Protect"
+          ],
+          "baseStats": {
+            "hp": 50,
+            "attack": 95,
+            "defense": 180,
+            "specialAttack": 85,
+            "specialDefense": 45,
+            "speed": 70
+          }
+        },
+        {
+          "pokemonId": 80,
+          "name": "Slowbro",
+          "level": 52,
+          "moves": [
+            "Ice Beam",
+            "Surf",
+            "Amnesia",
+            "Yawn"
+          ],
+          "baseStats": {
+            "hp": 95,
+            "attack": 75,
+            "defense": 110,
+            "specialAttack": 100,
+            "specialDefense": 80,
+            "speed": 30
+          }
+        },
+        {
+          "pokemonId": 124,
+          "name": "Jynx",
+          "level": 54,
+          "moves": [
+            "DoubleSlap",
+            "Ice Punch",
+            "Lovely Kiss",
+            "Attract"
+          ],
+          "baseStats": {
+            "hp": 65,
+            "attack": 50,
+            "defense": 35,
+            "specialAttack": 115,
+            "specialDefense": 95,
+            "speed": 95
+          }
+        },
+        {
+          "pokemonId": 131,
+          "name": "Lapras",
+          "level": 54,
+          "moves": [
+            "Body Slam",
+            "Confuse Ray",
+            "Surf",
+            "Ice Beam"
+          ],
+          "baseStats": {
+            "hp": 130,
+            "attack": 85,
+            "defense": 80,
+            "specialAttack": 85,
+            "specialDefense": 95,
+            "speed": 60
+          }
+        }
+      ]
+    },
+    {
+      "id": "elite-four-bruno",
+      "name": "Bruno",
+      "location": "Indigo Plateau",
+      "cap": 56,
+      "order": 10,
+      "team": [
+        {
+          "pokemonId": 95,
+          "name": "Onix",
+          "level": 51,
+          "moves": [
+            "Earthquake",
+            "Rock Tomb",
+            "Iron Tail",
+            "Roar"
+          ],
+          "baseStats": {
+            "hp": 35,
+            "attack": 45,
+            "defense": 160,
+            "specialAttack": 30,
+            "specialDefense": 45,
+            "speed": 70
+          }
+        },
+        {
+          "pokemonId": 107,
+          "name": "Hitmonchan",
+          "level": 53,
+          "moves": [
+            "Sky Uppercut",
+            "Mach Punch",
+            "Rock Tomb",
+            "Counter"
+          ],
+          "baseStats": {
+            "hp": 50,
+            "attack": 105,
+            "defense": 79,
+            "specialAttack": 35,
+            "specialDefense": 110,
+            "speed": 76
+          }
+        },
+        {
+          "pokemonId": 106,
+          "name": "Hitmonlee",
+          "level": 53,
+          "moves": [
+            "Mega Kick",
+            "Foresight",
+            "Brick Break",
+            "Facade"
+          ],
+          "baseStats": {
+            "hp": 50,
+            "attack": 120,
+            "defense": 53,
+            "specialAttack": 35,
+            "specialDefense": 110,
+            "speed": 87
+          }
+        },
+        {
+          "pokemonId": 95,
+          "name": "Onix",
+          "level": 54,
+          "moves": [
+            "Double-Edge",
+            "Iron Tail",
+            "Earthquake",
+            "Sand Tomb"
+          ],
+          "baseStats": {
+            "hp": 35,
+            "attack": 45,
+            "defense": 160,
+            "specialAttack": 30,
+            "specialDefense": 45,
+            "speed": 70
+          }
+        },
+        {
+          "pokemonId": 68,
+          "name": "Machamp",
+          "level": 56,
+          "moves": [
+            "Bulk Up",
+            "Cross Chop",
+            "Scary Face",
+            "Rock Tomb"
+          ],
+          "baseStats": {
+            "hp": 90,
+            "attack": 130,
+            "defense": 80,
+            "specialAttack": 65,
+            "specialDefense": 85,
+            "speed": 55
+          }
+        }
+      ]
+    },
+    {
+      "id": "elite-four-agatha",
+      "name": "Agatha",
+      "location": "Indigo Plateau",
+      "cap": 58,
+      "order": 11,
+      "team": [
+        {
+          "pokemonId": 94,
+          "name": "Gengar",
+          "level": 54,
+          "moves": [
+            "Confuse Ray",
+            "Shadow Punch",
+            "Double Team",
+            "Toxic"
+          ],
+          "baseStats": {
+            "hp": 60,
+            "attack": 65,
+            "defense": 60,
+            "specialAttack": 130,
+            "specialDefense": 75,
+            "speed": 110
+          }
+        },
+        {
+          "pokemonId": 42,
+          "name": "Golbat",
+          "level": 54,
+          "moves": [
+            "Confuse Ray",
+            "Bite",
+            "Air Cutter",
+            "Poison Fang"
+          ],
+          "baseStats": {
+            "hp": 75,
+            "attack": 80,
+            "defense": 70,
+            "specialAttack": 65,
+            "specialDefense": 75,
+            "speed": 90
+          }
+        },
+        {
+          "pokemonId": 93,
+          "name": "Haunter",
+          "level": 53,
+          "moves": [
+            "Mean Look",
+            "Curse",
+            "Hypnosis",
+            "Dream Eater"
+          ],
+          "baseStats": {
+            "hp": 45,
+            "attack": 50,
+            "defense": 45,
+            "specialAttack": 115,
+            "specialDefense": 55,
+            "speed": 95
+          }
+        },
+        {
+          "pokemonId": 24,
+          "name": "Arbok",
+          "level": 56,
+          "moves": [
+            "Bite",
+            "Sludge Bomb",
+            "Screech",
+            "Iron Tail"
+          ],
+          "baseStats": {
+            "hp": 60,
+            "attack": 85,
+            "defense": 69,
+            "specialAttack": 65,
+            "specialDefense": 79,
+            "speed": 80
+          }
+        },
+        {
+          "pokemonId": 94,
+          "name": "Gengar",
+          "level": 58,
+          "moves": [
+            "Hypnosis",
+            "Shadow Ball",
+            "Sludge Bomb",
+            "Nightmare"
+          ],
+          "baseStats": {
+            "hp": 60,
+            "attack": 65,
+            "defense": 60,
+            "specialAttack": 130,
+            "specialDefense": 75,
+            "speed": 110
+          }
+        }
+      ]
+    },
+    {
+      "id": "elite-four-lance",
+      "name": "Lance",
+      "location": "Indigo Plateau",
+      "cap": 60,
+      "order": 12,
+      "team": [
+        {
+          "pokemonId": 130,
+          "name": "Gyarados",
+          "level": 56,
+          "moves": [
+            "Bite",
+            "Dragon Rage",
+            "Twister",
+            "Hyper Beam"
+          ],
+          "baseStats": {
+            "hp": 95,
+            "attack": 125,
+            "defense": 79,
+            "specialAttack": 60,
+            "specialDefense": 100,
+            "speed": 81
+          }
+        },
+        {
+          "pokemonId": 148,
+          "name": "Dragonair",
+          "level": 54,
+          "moves": [
+            "Safeguard",
+            "Outrage",
+            "Dragon Rage",
+            "Hyper Beam"
+          ],
+          "baseStats": {
+            "hp": 61,
+            "attack": 84,
+            "defense": 65,
+            "specialAttack": 70,
+            "specialDefense": 70,
+            "speed": 70
+          }
+        },
+        {
+          "pokemonId": 148,
+          "name": "Dragonair",
+          "level": 54,
+          "moves": [
+            "Safeguard",
+            "Outrage",
+            "Thunder Wave",
+            "Hyper Beam"
+          ],
+          "baseStats": {
+            "hp": 61,
+            "attack": 84,
+            "defense": 65,
+            "specialAttack": 70,
+            "specialDefense": 70,
+            "speed": 70
+          }
+        },
+        {
+          "pokemonId": 142,
+          "name": "Aerodactyl",
+          "level": 58,
+          "moves": [
+            "Wing Attack",
+            "AncientPower",
+            "Scary Face",
+            "Hyper Beam"
+          ],
+          "baseStats": {
+            "hp": 80,
+            "attack": 105,
+            "defense": 65,
+            "specialAttack": 60,
+            "specialDefense": 75,
+            "speed": 130
+          }
+        },
+        {
+          "pokemonId": 149,
+          "name": "Dragonite",
+          "level": 60,
+          "moves": [
+            "Safeguard",
+            "Outrage",
+            "Wing Attack",
+            "Hyper Beam"
+          ],
+          "baseStats": {
+            "hp": 91,
+            "attack": 134,
+            "defense": 95,
+            "specialAttack": 100,
+            "specialDefense": 100,
+            "speed": 80
+          }
+        }
+      ]
+    },
+    {
+      "id": "champion-blue",
+      "name": "Champion Blue",
+      "location": "Indigo Plateau",
+      "cap": 63,
+      "order": 13,
+      "team": [
+        {
+          "pokemonId": 18,
+          "name": "Pidgeot",
+          "level": 59,
+          "moves": [
+            "Aerial Ace",
+            "FeatherDance",
+            "Sand-Attack",
+            "Whirlwind"
+          ],
+          "baseStats": {
+            "hp": 83,
+            "attack": 80,
+            "defense": 75,
+            "specialAttack": 70,
+            "specialDefense": 70,
+            "speed": 101
+          }
+        },
+        {
+          "pokemonId": 65,
+          "name": "Alakazam",
+          "level": 57,
+          "moves": [
+            "Psychic",
+            "Future Sight",
+            "Recover",
+            "Reflect"
+          ],
+          "baseStats": {
+            "hp": 55,
+            "attack": 50,
+            "defense": 45,
+            "specialAttack": 135,
+            "specialDefense": 95,
+            "speed": 120
+          }
+        },
+        {
+          "pokemonId": 112,
+          "name": "Rhydon",
+          "level": 59,
+          "moves": [
+            "Take Down",
+            "Earthquake",
+            "Rock Tomb",
+            "Scary Face"
+          ],
+          "baseStats": {
+            "hp": 105,
+            "attack": 130,
+            "defense": 120,
+            "specialAttack": 45,
+            "specialDefense": 45,
+            "speed": 40
+          }
+        },
+        {
+          "pokemonId": 130,
+          "name": "Gyarados",
+          "level": 61,
+          "moves": [
+            "Hydro Pump",
+            "Dragon Rage",
+            "Bite",
+            "Thrash"
+          ],
+          "baseStats": {
+            "hp": 95,
+            "attack": 125,
+            "defense": 79,
+            "specialAttack": 60,
+            "specialDefense": 100,
+            "speed": 81
+          }
+        },
+        {
+          "pokemonId": 59,
+          "name": "Arcanine",
+          "level": 59,
+          "moves": [
+            "ExtremeSpeed",
+            "Flamethrower",
+            "Roar",
+            "Bite"
+          ],
+          "baseStats": {
+            "hp": 90,
+            "attack": 110,
+            "defense": 80,
+            "specialAttack": 100,
+            "specialDefense": 80,
+            "speed": 95
+          }
+        },
+        {
+          "pokemonId": 9,
+          "name": "Blastoise",
+          "level": 63,
+          "moves": [
+            "Hydro Pump",
+            "Rain Dance",
+            "Skull Bash",
+            "Bite"
+          ],
+          "baseStats": {
+            "hp": 79,
+            "attack": 83,
+            "defense": 100,
+            "specialAttack": 85,
+            "specialDefense": 105,
+            "speed": 78
+          }
+        }
+      ]
+    }
+  ]
+}
