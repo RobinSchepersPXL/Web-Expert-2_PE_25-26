@@ -1,9 +1,10 @@
-import { FlatList, Text, View, StyleSheet, Pressable, Image } from 'react-native';
+import { FlatList, Text, View, StyleSheet, Image } from 'react-native';
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import fireRedRoutes from '../data/firered_routes.json';
+import AnimatedCard from '../components/AnimatedCard';
 
 export default function RoutesScreen({ navigation }) {
   const routes = fireRedRoutes.routes.sort((a, b) => a.order - b.order);
@@ -35,7 +36,7 @@ export default function RoutesScreen({ navigation }) {
           const encounter = encounters[item.id];
 
           return (
-            <Pressable
+            <AnimatedCard
               style={styles.card}
               onPress={() =>
                 navigation.navigate('RouteDetail', { routeItem: item })
@@ -63,7 +64,7 @@ export default function RoutesScreen({ navigation }) {
               ) : (
                 <Text style={styles.empty}>No encounter yet</Text>
               )}
-            </Pressable>
+            </AnimatedCard>
           );
         }}
       />
@@ -83,10 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   card: {
-    backgroundColor: '#fff',
     padding: 14,
-    borderRadius: 12,
-    marginBottom: 10,
   },
   routeName: {
     fontSize: 18,

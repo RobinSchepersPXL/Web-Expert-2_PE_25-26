@@ -1,4 +1,14 @@
-import { View, Text, StyleSheet, TextInput, Button, Pressable, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  Pressable,
+  Image,
+  Share,
+} from 'react-native';
+
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -20,6 +30,7 @@ export default function RouteDetailScreen({ route }) {
   const loadEncounter = async () => {
     try {
       const data = await AsyncStorage.getItem(STORAGE_KEY);
+
       if (data) {
         const parsed = JSON.parse(data);
 
@@ -44,7 +55,9 @@ export default function RouteDetailScreen({ route }) {
 
       const searchName = pokemonName.trim().toLowerCase();
 
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchName}`);
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${searchName}`
+      );
 
       if (!response.ok) {
         setError('Pokémon not found. Check the name and try again.');
@@ -65,7 +78,10 @@ export default function RouteDetailScreen({ route }) {
 
       parsed[routeItem.id] = newEncounter;
 
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      await AsyncStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(parsed)
+      );
 
       setEncounter(newEncounter);
       setPokemonName('');
@@ -92,7 +108,10 @@ export default function RouteDetailScreen({ route }) {
 
       parsed[routeItem.id] = updatedEncounter;
 
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      await AsyncStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(parsed)
+      );
 
       setEncounter(updatedEncounter);
     } catch (e) {
@@ -100,10 +119,25 @@ export default function RouteDetailScreen({ route }) {
     }
   };
 
+  const shareEncounter = async () => {
+    if (!encounter) return;
+
+    try {
+      await Share.share({
+        message: `I caught ${encounter.pokemon} at ${routeItem.name}!\nStatus: ${encounter.status}`,
+      });
+    } catch (e) {
+      console.log('Error sharing encounter', e);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{routeItem.name}</Text>
-      <Text style={styles.meta}>{routeItem.types.join(', ')}</Text>
+
+      <Text style={styles.meta}>
+        {routeItem.types.join(', ')}
+      </Text>
 
       <TextInput
         style={styles.input}
@@ -113,7 +147,9 @@ export default function RouteDetailScreen({ route }) {
         autoCapitalize="none"
       />
 
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+      {error ? (
+        <Text style={styles.error}>{error}</Text>
+      ) : null}
 
       <Text style={styles.label}>Status</Text>
 
@@ -123,14 +159,16 @@ export default function RouteDetailScreen({ route }) {
             key={item}
             style={[
               styles.statusButton,
-              status === item && styles.statusButtonActive,
+              status === item &&
+                styles.statusButtonActive,
             ]}
             onPress={() => setStatus(item)}
           >
             <Text
               style={[
                 styles.statusText,
-                status === item && styles.statusTextActive,
+                status === item &&
+                  styles.statusTextActive,
               ]}
             >
               {item}
@@ -147,38 +185,63 @@ export default function RouteDetailScreen({ route }) {
 
       {encounter && (
         <View style={styles.resultBox}>
-          <Text style={styles.resultTitle}>Current encounter</Text>
+          <Text style={styles.resultTitle}>
+            Current encounter
+          </Text>
 
           {encounter.sprite && (
-            <Image source={{ uri: encounter.sprite }} style={styles.sprite} />
+            <Image
+              source={{ uri: encounter.sprite }}
+              style={styles.sprite}
+            />
           )}
 
-          <Text style={styles.result}>Pokémon: {encounter.pokemon}</Text>
-          <Text style={styles.result}>Status: {encounter.status}</Text>
+          <Text style={styles.result}>
+            Pokémon: {encounter.pokemon}
+          </Text>
+
+          <Text style={styles.result}>
+            Status: {encounter.status}
+          </Text>
+
+          <View style={styles.shareButton}>
+            <Button
+              title="Share Encounter"
+              onPress={shareEncounter}
+            />
+          </View>
 
           <View style={styles.quickActions}>
-            <Text style={styles.label}>Update status</Text>
+            <Text style={styles.label}>
+              Update status
+            </Text>
 
             <View style={styles.statusRow}>
-              {['caught', 'dead', 'failed'].map((item) => (
-                <Pressable
-                  key={item}
-                  style={[
-                    styles.statusButton,
-                    encounter.status === item && styles.statusButtonActive,
-                  ]}
-                  onPress={() => updateEncounterStatus(item)}
-                >
-                  <Text
+              {['caught', 'dead', 'failed'].map(
+                (item) => (
+                  <Pressable
+                    key={item}
                     style={[
-                      styles.statusText,
-                      encounter.status === item && styles.statusTextActive,
+                      styles.statusButton,
+                      encounter.status === item &&
+                        styles.statusButtonActive,
                     ]}
+                    onPress={() =>
+                      updateEncounterStatus(item)
+                    }
                   >
-                    {item}
-                  </Text>
-                </Pressable>
-              ))}
+                    <Text
+                      style={[
+                        styles.statusText,
+                        encounter.status === item &&
+                          styles.statusTextActive,
+                      ]}
+                    >
+                      {item}
+                    </Text>
+                  </Pressable>
+                )
+              )}
             </View>
           </View>
         </View>
@@ -193,35 +256,42 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f6f6f6',
   },
+
   title: {
     fontSize: 28,
     fontWeight: '700',
     marginBottom: 8,
   },
+
   meta: {
     color: '#666',
     marginBottom: 20,
   },
+
   input: {
     backgroundColor: '#fff',
     padding: 12,
     borderRadius: 8,
     marginBottom: 8,
   },
+
   error: {
     color: '#b00020',
     marginBottom: 12,
     fontWeight: '600',
   },
+
   label: {
     fontWeight: '700',
     marginBottom: 8,
   },
+
   statusRow: {
     flexDirection: 'row',
     gap: 8,
     marginBottom: 16,
   },
+
   statusButton: {
     backgroundColor: '#fff',
     paddingVertical: 10,
@@ -230,37 +300,49 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ddd',
   },
+
   statusButtonActive: {
     backgroundColor: '#111',
     borderColor: '#111',
   },
+
   statusText: {
     color: '#111',
     fontWeight: '600',
     textTransform: 'capitalize',
   },
+
   statusTextActive: {
     color: '#fff',
   },
+
   resultBox: {
     marginTop: 24,
     backgroundColor: '#fff',
     padding: 14,
     borderRadius: 12,
   },
+
   resultTitle: {
     fontWeight: '700',
     marginBottom: 8,
   },
+
   sprite: {
     width: 96,
     height: 96,
     marginBottom: 8,
   },
+
   result: {
     fontSize: 16,
     marginBottom: 4,
   },
+
+  shareButton: {
+    marginTop: 16,
+  },
+
   quickActions: {
     marginTop: 16,
   },
