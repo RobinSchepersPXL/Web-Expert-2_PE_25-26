@@ -9,6 +9,7 @@ import AnimatedCard from '../components/AnimatedCard';
 export default function RoutesScreen({ navigation }) {
   const routes = fireRedRoutes.routes.sort((a, b) => a.order - b.order);
   const [encounters, setEncounters] = useState({});
+  const [refreshing, setRefreshing] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
@@ -25,6 +26,12 @@ export default function RoutesScreen({ navigation }) {
     }
   };
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await loadEncounters();
+    setRefreshing(false);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>FireRed Routes</Text>
@@ -32,6 +39,8 @@ export default function RoutesScreen({ navigation }) {
       <FlatList
         data={routes}
         keyExtractor={(item) => item.id}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
         renderItem={({ item }) => {
           const encounter = encounters[item.id];
 
