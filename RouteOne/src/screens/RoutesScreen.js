@@ -1,8 +1,7 @@
-import { FlatList, Text, View, StyleSheet, Pressable } from 'react-native';
+import { FlatList, Text, View, StyleSheet, Pressable, Image } from 'react-native';
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FlatList, Text, View, StyleSheet, Pressable, Image } from 'react-native';
 
 import fireRedRoutes from '../data/firered_routes.json';
 
@@ -49,9 +48,18 @@ export default function RoutesScreen({ navigation }) {
               </Text>
 
               {encounter ? (
-                <Text style={styles.encounter}>
-                  Encounter: {encounter.pokemon} ({encounter.status})
-                </Text>
+                <View style={styles.encounterRow}>
+                  {encounter.sprite && (
+                    <Image
+                      source={{ uri: encounter.sprite }}
+                      style={styles.sprite}
+                    />
+                  )}
+
+                  <Text style={styles.encounter}>
+                    Encounter: {encounter.pokemon} ({encounter.status})
+                  </Text>
+                </View>
               ) : (
                 <Text style={styles.empty}>No encounter yet</Text>
               )}
@@ -88,8 +96,17 @@ const styles = StyleSheet.create({
     marginTop: 4,
     color: '#666',
   },
-  encounter: {
+  encounterRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 8,
+  },
+  sprite: {
+    width: 40,
+    height: 40,
+    marginRight: 8,
+  },
+  encounter: {
     fontWeight: '600',
   },
   empty: {
