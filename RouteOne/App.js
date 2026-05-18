@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RunListScreen from './src/screens/RunListScreen';
 import MainTabs from './src/navigation/MainTabs';
 import RouteDetailScreen from './src/screens/RouteDetailScreen';
+import CapDetailScreen from './src/screens/CapDetailScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,16 +14,27 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="RunList" component={RunListScreen} />
+          <Stack.Screen
+            name="RunList"
+            component={RunListScreen}
+          />
+
           <Stack.Screen
             name="RunTabs"
             component={MainTabs}
             options={{ headerShown: false }}
           />
+
           <Stack.Screen
-          name="RouteDetail"
-          component={RouteDetailScreen}
-          options={{ title: 'Route Detail' }}
+            name="RouteDetail"
+            component={RouteDetailScreen}
+            options={{ title: 'Route Detail' }}
+          />
+
+          <Stack.Screen
+            name="CapDetail"
+            component={CapDetailScreen}
+            options={{ title: 'Battle Details' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

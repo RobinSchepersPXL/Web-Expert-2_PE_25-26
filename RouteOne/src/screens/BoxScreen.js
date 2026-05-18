@@ -1,4 +1,4 @@
-import { FlatList, Text, View, StyleSheet } from 'react-native';
+import { FlatList, Text, View, StyleSheet, Image } from 'react-native';
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -49,8 +49,16 @@ export default function BoxScreen() {
           keyExtractor={(item) => item.routeId}
           renderItem={({ item }) => (
             <View style={styles.card}>
-              <Text style={styles.pokemon}>{item.pokemon}</Text>
-              <Text style={styles.route}>Caught at: {item.routeName}</Text>
+              <View style={styles.row}>
+                {item.sprite && (
+                  <Image source={{ uri: item.sprite }} style={styles.sprite} />
+                )}
+
+                <View>
+                  <Text style={styles.pokemon}>{item.pokemon}</Text>
+                  <Text style={styles.route}>Caught at: {item.routeName}</Text>
+                </View>
+              </View>
             </View>
           )}
         />
@@ -80,9 +88,19 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 10,
   },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  sprite: {
+    width: 56,
+    height: 56,
+    marginRight: 12,
+  },
   pokemon: {
     fontSize: 18,
     fontWeight: '700',
+    textTransform: 'capitalize',
   },
   route: {
     marginTop: 4,

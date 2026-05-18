@@ -1,8 +1,8 @@
-import { FlatList, Text, View, StyleSheet } from 'react-native';
+import { FlatList, Text, View, StyleSheet, Pressable } from 'react-native';
 
 import fireRedCaps from '../data/firered_caps.json';
 
-export default function CapsScreen() {
+export default function CapsScreen({ navigation }) {
   const caps = fireRedCaps.caps.sort((a, b) => a.order - b.order);
 
   return (
@@ -13,7 +13,10 @@ export default function CapsScreen() {
         data={caps}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
+          <Pressable
+            style={styles.card}
+            onPress={() => navigation.navigate('CapDetail', { capItem: item })}
+          >
             <View>
               <Text style={styles.name}>{item.name}</Text>
               <Text style={styles.location}>{item.location}</Text>
@@ -22,7 +25,7 @@ export default function CapsScreen() {
             <View style={styles.capBadge}>
               <Text style={styles.capText}>Lv. {item.cap}</Text>
             </View>
-          </View>
+          </Pressable>
         )}
       />
     </View>
