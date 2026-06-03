@@ -5,8 +5,10 @@ import {
   Pressable,
   FlatList,
   Image,
+  Modal,
 } from 'react-native';
 
+import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const games = [
@@ -44,13 +46,43 @@ const games = [
   },
 ];
 
+const starters = [
+  {
+    id: 'bulbasaur',
+    name: 'Bulbasaur',
+    sprite:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+  },
+  {
+    id: 'charmander',
+    name: 'Charmander',
+    sprite:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
+  },
+  {
+    id: 'squirtle',
+    name: 'Squirtle',
+    sprite:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png',
+  },
+];
+
 export default function RunListScreen({ navigation }) {
+  const [starterModalVisible, setStarterModalVisible] = useState(false);
+
   const openRun = () => {
     navigation.navigate('AppDrawer');
   };
 
-  const startNewRun = async () => {
+  const startNewRun = () => {
+    setStarterModalVisible(true);
+  };
+
+  const selectStarter = async (starter) => {
     await AsyncStorage.removeItem('encounters');
+    await AsyncStorage.setItem('starter', starter.id);
+
+    setStarterModalVisible(false);
     navigation.navigate('AppDrawer');
   };
 
@@ -73,7 +105,7 @@ export default function RunListScreen({ navigation }) {
 
         <Pressable style={styles.menuCard} onPress={startNewRun}>
           <Text style={styles.menuTitle}>New Run</Text>
-          <Text style={styles.menuText}>Start a new FireRed run</Text>
+          <Text style={styles.menuText}>Choose starter and start a new run</Text>
         </Pressable>
 
         <Pressable style={[styles.menuCard, styles.disabledCard]} disabled>
@@ -111,6 +143,44 @@ export default function RunListScreen({ navigation }) {
           </Pressable>
         )}
       />
+
+      <Modal
+        visible={starterModalVisible}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setStarterModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalBox}>
+            <Text style={styles.modalTitle}>Choose your starter</Text>
+            <Text style={styles.modalText}>
+              This changes Champion Blue’s final team.
+            </Text>
+
+            {starters.map((starter) => (
+              <Pressable
+                key={starter.id}
+                style={styles.starterCard}
+                onPress={() => selectStarter(starter)}
+              >
+                <Image source={{ uri: starter.sprite }} style={styles.starterImage} />
+
+                <View>
+                  <Text style={styles.starterName}>{starter.name}</Text>
+                  <Text style={styles.starterText}>Start with {starter.name}</Text>
+                </View>
+              </Pressable>
+            ))}
+
+            <Pressable
+              style={styles.cancelButton}
+              onPress={() => setStarterModalVisible(false)}
+            >
+              <Text style={styles.cancelText}>Cancel</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -212,5 +282,65 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#777',
     fontSize: 12,
+  },
+
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.45)',
+    justifyContent: 'flex-end',
+  },
+
+  modalBox: {
+    backgroundColor: '#f6f6f6',
+    padding: 20,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+  },
+
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: '800',
+  },
+
+  modalText: {
+    color: '#666',
+    marginTop: 6,
+    marginBottom: 16,
+  },
+
+  starterCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 14,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  starterImage: {
+    width: 56,
+    height: 56,
+    marginRight: 12,
+  },
+
+  starterName: {
+    fontSize: 18,
+    fontWeight: '800',
+  },
+
+  starterText: {
+    color: '#666',
+    marginTop: 4,
+  },
+
+  cancelButton: {
+    marginTop: 8,
+    padding: 14,
+    alignItems: 'center',
+  },
+
+  cancelText: {
+    fontWeight: '800',
+    color: '#111',
   },
 });

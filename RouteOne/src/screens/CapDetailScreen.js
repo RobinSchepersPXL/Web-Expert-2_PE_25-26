@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,10 +7,98 @@ import {
   Image,
   Pressable,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const championBlueTeams = {
+  bulbasaur: [
+    { pokemonId: 18, name: 'Pidgeot', level: 59, moves: ['Aerial Ace', 'Whirlwind', 'Quick Attack', 'Feather Dance'], baseStats: { hp: 83, attack: 80, defense: 75, spAttack: 70, spDefense: 70, speed: 101 } },
+    { pokemonId: 65, name: 'Alakazam', level: 57, moves: ['Psychic', 'Reflect', 'Recover', 'Future Sight'], baseStats: { hp: 55, attack: 50, defense: 45, spAttack: 135, spDefense: 95, speed: 120 } },
+    { pokemonId: 112, name: 'Rhydon', level: 59, moves: ['Take Down', 'Earthquake', 'Rock Tomb', 'Scary Face'], baseStats: { hp: 105, attack: 130, defense: 120, spAttack: 45, spDefense: 45, speed: 40 } },
+    { pokemonId: 103, name: 'Exeggutor', level: 59, moves: ['Barrage', 'Hypnosis', 'Light Screen', 'Giga Drain'], baseStats: { hp: 95, attack: 95, defense: 85, spAttack: 125, spDefense: 75, speed: 55 } },
+    { pokemonId: 130, name: 'Gyarados', level: 61, moves: ['Hydro Pump', 'Bite', 'Dragon Rage', 'Leer'], baseStats: { hp: 95, attack: 125, defense: 79, spAttack: 60, spDefense: 100, speed: 81 } },
+    { pokemonId: 6, name: 'Charizard', level: 63, moves: ['Fire Blast', 'Slash', 'Aerial Ace', 'Fire Spin'], baseStats: { hp: 78, attack: 84, defense: 78, spAttack: 109, spDefense: 85, speed: 100 } },
+  ],
+  charmander: [
+    { pokemonId: 18, name: 'Pidgeot', level: 59, moves: ['Aerial Ace', 'Whirlwind', 'Quick Attack', 'Feather Dance'], baseStats: { hp: 83, attack: 80, defense: 75, spAttack: 70, spDefense: 70, speed: 101 } },
+    { pokemonId: 65, name: 'Alakazam', level: 57, moves: ['Psychic', 'Reflect', 'Recover', 'Future Sight'], baseStats: { hp: 55, attack: 50, defense: 45, spAttack: 135, spDefense: 95, speed: 120 } },
+    { pokemonId: 112, name: 'Rhydon', level: 59, moves: ['Take Down', 'Earthquake', 'Rock Tomb', 'Scary Face'], baseStats: { hp: 105, attack: 130, defense: 120, spAttack: 45, spDefense: 45, speed: 40 } },
+    { pokemonId: 59, name: 'Arcanine', level: 59, moves: ['Flamethrower', 'Roar', 'Extreme Speed', 'Bite'], baseStats: { hp: 90, attack: 110, defense: 80, spAttack: 100, spDefense: 80, speed: 95 } },
+    { pokemonId: 103, name: 'Exeggutor', level: 61, moves: ['Barrage', 'Hypnosis', 'Light Screen', 'Giga Drain'], baseStats: { hp: 95, attack: 95, defense: 85, spAttack: 125, spDefense: 75, speed: 55 } },
+    { pokemonId: 9, name: 'Blastoise', level: 63, moves: ['Hydro Pump', 'Bite', 'Rain Dance', 'Skull Bash'], baseStats: { hp: 79, attack: 83, defense: 100, spAttack: 85, spDefense: 105, speed: 78 } },
+  ],
+  squirtle: [
+    { pokemonId: 18, name: 'Pidgeot', level: 59, moves: ['Aerial Ace', 'Whirlwind', 'Quick Attack', 'Feather Dance'], baseStats: { hp: 83, attack: 80, defense: 75, spAttack: 70, spDefense: 70, speed: 101 } },
+    { pokemonId: 65, name: 'Alakazam', level: 57, moves: ['Psychic', 'Reflect', 'Recover', 'Future Sight'], baseStats: { hp: 55, attack: 50, defense: 45, spAttack: 135, spDefense: 95, speed: 120 } },
+    { pokemonId: 112, name: 'Rhydon', level: 59, moves: ['Take Down', 'Earthquake', 'Rock Tomb', 'Scary Face'], baseStats: { hp: 105, attack: 130, defense: 120, spAttack: 45, spDefense: 45, speed: 40 } },
+    { pokemonId: 130, name: 'Gyarados', level: 59, moves: ['Hydro Pump', 'Bite', 'Dragon Rage', 'Leer'], baseStats: { hp: 95, attack: 125, defense: 79, spAttack: 60, spDefense: 100, speed: 81 } },
+    { pokemonId: 59, name: 'Arcanine', level: 61, moves: ['Flamethrower', 'Roar', 'Extreme Speed', 'Bite'], baseStats: { hp: 90, attack: 110, defense: 80, spAttack: 100, spDefense: 80, speed: 95 } },
+    { pokemonId: 3, name: 'Venusaur', level: 63, moves: ['Giga Drain', 'SolarBeam', 'Growth', 'Synthesis'], baseStats: { hp: 80, attack: 82, defense: 83, spAttack: 100, spDefense: 100, speed: 80 } },
+  ],
+};
 
 export default function CapDetailScreen({ route }) {
   const { capItem } = route.params;
+
   const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [starter, setStarter] = useState(null);
+  const [isDefeated, setIsDefeated] = useState(false);
+
+  useEffect(() => {
+    loadStarter();
+    loadDefeatedStatus();
+  }, []);
+
+  const loadStarter = async () => {
+    try {
+      const savedStarter = await AsyncStorage.getItem('starter');
+      setStarter(savedStarter || 'charmander');
+    } catch (e) {
+      console.log('Error loading starter', e);
+      setStarter('charmander');
+    }
+  };
+
+  const loadDefeatedStatus = async () => {
+    try {
+      const data = await AsyncStorage.getItem('defeatedBosses');
+
+      if (!data) return;
+
+      const bosses = JSON.parse(data);
+      setIsDefeated(bosses.includes(capItem.id));
+    } catch (e) {
+      console.log('Error loading defeated status', e);
+    }
+  };
+
+  const toggleDefeated = async () => {
+    try {
+      const data = await AsyncStorage.getItem('defeatedBosses');
+      let bosses = data ? JSON.parse(data) : [];
+
+      if (bosses.includes(capItem.id)) {
+        bosses = bosses.filter((id) => id !== capItem.id);
+        setIsDefeated(false);
+      } else {
+        bosses.push(capItem.id);
+        setIsDefeated(true);
+      }
+
+      await AsyncStorage.setItem('defeatedBosses', JSON.stringify(bosses));
+    } catch (e) {
+      console.log('Error updating boss status', e);
+    }
+  };
+
+  const getTeam = () => {
+    if (capItem.id === 'champion-blue' && starter) {
+      return championBlueTeams[starter] || capItem.team;
+    }
+
+    return capItem.team;
+  };
+
+  const team = getTeam();
 
   const togglePokemon = (index) => {
     setSelectedPokemon(selectedPokemon === index ? null : index);
@@ -22,10 +110,33 @@ export default function CapDetailScreen({ route }) {
       <Text style={styles.location}>{capItem.location}</Text>
       <Text style={styles.cap}>Level Cap: {capItem.cap}</Text>
 
+      {capItem.id === 'champion-blue' && (
+        <Text style={styles.starterNote}>
+          Your starter: {starter || 'loading...'}
+        </Text>
+      )}
+
+      <Pressable
+        style={[
+          styles.defeatButton,
+          isDefeated && styles.defeatButtonActive,
+        ]}
+        onPress={toggleDefeated}
+      >
+        <Text
+          style={[
+            styles.defeatButtonText,
+            isDefeated && styles.defeatButtonTextActive,
+          ]}
+        >
+          {isDefeated ? '✓ Defeated' : 'Mark as Defeated'}
+        </Text>
+      </Pressable>
+
       <Text style={styles.subtitle}>Team</Text>
 
       <FlatList
-        data={capItem.team}
+        data={team}
         keyExtractor={(item, index) => `${item.pokemonId}-${index}`}
         renderItem={({ item, index }) => {
           const isOpen = selectedPokemon === index;
@@ -91,6 +202,28 @@ const styles = StyleSheet.create({
   title: { fontSize: 28, fontWeight: '700' },
   location: { marginTop: 4, color: '#666' },
   cap: { marginTop: 12, fontSize: 18, fontWeight: '700' },
+  starterNote: {
+    marginTop: 8,
+    color: '#666',
+    fontWeight: '600',
+    textTransform: 'capitalize',
+  },
+  defeatButton: {
+    marginTop: 12,
+    backgroundColor: '#fff',
+    padding: 12,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  defeatButtonActive: {
+    backgroundColor: '#111',
+  },
+  defeatButtonText: {
+    fontWeight: '700',
+  },
+  defeatButtonTextActive: {
+    color: '#fff',
+  },
   subtitle: {
     marginTop: 24,
     marginBottom: 12,

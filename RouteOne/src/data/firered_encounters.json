@@ -1,0 +1,1599 @@
+{
+    "gameId": "firered",
+    "encounters": {
+      "pallet-town": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 60,
+          "name": "Poliwag"
+        }
+      ],
+      "route-1": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        }
+      ],
+      "viridian-city": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 60,
+          "name": "Poliwag"
+        }
+      ],
+      "route-22": [
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        },
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 56,
+          "name": "Mankey"
+        }
+      ],
+      "route-2": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        },
+        {
+          "pokemonId": 10,
+          "name": "Caterpie"
+        },
+        {
+          "pokemonId": 13,
+          "name": "Weedle"
+        }
+      ],
+      "viridian-forest": [
+        {
+          "pokemonId": 10,
+          "name": "Caterpie"
+        },
+        {
+          "pokemonId": 11,
+          "name": "Metapod"
+        },
+        {
+          "pokemonId": 13,
+          "name": "Weedle"
+        },
+        {
+          "pokemonId": 14,
+          "name": "Kakuna"
+        },
+        {
+          "pokemonId": 25,
+          "name": "Pikachu"
+        }
+      ],
+      "pewter-city": [],
+      "route-3": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 39,
+          "name": "Jigglypuff"
+        },
+        {
+          "pokemonId": 56,
+          "name": "Mankey"
+        }
+      ],
+      "mt-moon": [
+        {
+          "pokemonId": 41,
+          "name": "Zubat"
+        },
+        {
+          "pokemonId": 74,
+          "name": "Geodude"
+        },
+        {
+          "pokemonId": 46,
+          "name": "Paras"
+        },
+        {
+          "pokemonId": 35,
+          "name": "Clefairy"
+        }
+      ],
+      "route-4": [
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        },
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 23,
+          "name": "Ekans"
+        },
+        {
+          "pokemonId": 27,
+          "name": "Sandshrew"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        }
+      ],
+      "cerulean-city": [
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 60,
+          "name": "Poliwag"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        }
+      ],
+      "route-24": [
+        {
+          "pokemonId": 10,
+          "name": "Caterpie"
+        },
+        {
+          "pokemonId": 13,
+          "name": "Weedle"
+        },
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 63,
+          "name": "Abra"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        }
+      ],
+      "route-25": [
+        {
+          "pokemonId": 10,
+          "name": "Caterpie"
+        },
+        {
+          "pokemonId": 13,
+          "name": "Weedle"
+        },
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 63,
+          "name": "Abra"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        }
+      ],
+      "route-5": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 52,
+          "name": "Meowth"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        }
+      ],
+      "route-6": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 52,
+          "name": "Meowth"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        }
+      ],
+      "vermillion-city": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 90,
+          "name": "Shellder"
+        }
+      ],
+      "route-11": [
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 23,
+          "name": "Ekans"
+        },
+        {
+          "pokemonId": 27,
+          "name": "Sandshrew"
+        },
+        {
+          "pokemonId": 96,
+          "name": "Drowzee"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        }
+      ],
+      "digletts-cave": [
+        {
+          "pokemonId": 50,
+          "name": "Diglett"
+        },
+        {
+          "pokemonId": 51,
+          "name": "Dugtrio"
+        }
+      ],
+      "route-9": [
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        },
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 23,
+          "name": "Ekans"
+        },
+        {
+          "pokemonId": 27,
+          "name": "Sandshrew"
+        }
+      ],
+      "route-10": [
+        {
+          "pokemonId": 100,
+          "name": "Voltorb"
+        },
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 23,
+          "name": "Ekans"
+        },
+        {
+          "pokemonId": 27,
+          "name": "Sandshrew"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        },
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        }
+      ],
+      "rock tunnel": [
+        {
+          "pokemonId": 41,
+          "name": "Zubat"
+        },
+        {
+          "pokemonId": 74,
+          "name": "Geodude"
+        },
+        {
+          "pokemonId": 66,
+          "name": "Machop"
+        },
+        {
+          "pokemonId": 95,
+          "name": "Onix"
+        }
+      ],
+      "lavender-town": [],
+      "pokemon-tower": [
+        {
+          "pokemonId": 92,
+          "name": "Gastly"
+        },
+        {
+          "pokemonId": 93,
+          "name": "Haunter"
+        },
+        {
+          "pokemonId": 104,
+          "name": "Cubone"
+        }
+      ],
+      "route-12": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 44,
+          "name": "Gloom"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        },
+        {
+          "pokemonId": 70,
+          "name": "Weepinbell"
+        },
+        {
+          "pokemonId": 48,
+          "name": "Venonat"
+        },
+        {
+          "pokemonId": 143,
+          "name": "Snorlax"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 118,
+          "name": "Goldeen"
+        },
+        {
+          "pokemonId": 116,
+          "name": "Horsea"
+        }
+      ],
+      "route-8": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 52,
+          "name": "Meowth"
+        },
+        {
+          "pokemonId": 56,
+          "name": "Mankey"
+        },
+        {
+          "pokemonId": 23,
+          "name": "Ekans"
+        },
+        {
+          "pokemonId": 27,
+          "name": "Sandshrew"
+        },
+        {
+          "pokemonId": 58,
+          "name": "Growlithe"
+        },
+        {
+          "pokemonId": 37,
+          "name": "Vulpix"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        }
+      ],
+      "route-7": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 52,
+          "name": "Meowth"
+        },
+        {
+          "pokemonId": 56,
+          "name": "Mankey"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        },
+        {
+          "pokemonId": 58,
+          "name": "Growlithe"
+        },
+        {
+          "pokemonId": 37,
+          "name": "Vulpix"
+        }
+      ],
+      "celadon-city": [
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 60,
+          "name": "Poliwag"
+        },
+        {
+          "pokemonId": 88,
+          "name": "Grimer"
+        }
+      ],
+      "rocket-hideout": [],
+      "Saffron-City": [],
+      "silph-co": [],
+      "route-16": [
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        },
+        {
+          "pokemonId": 20,
+          "name": "Raticate"
+        },
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 84,
+          "name": "Doduo"
+        },
+        {
+          "pokemonId": 143,
+          "name": "Snorlax"
+        }
+      ],
+      "route-17": [
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        },
+        {
+          "pokemonId": 20,
+          "name": "Raticate"
+        },
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 22,
+          "name": "Fearow"
+        },
+        {
+          "pokemonId": 84,
+          "name": "Doduo"
+        }
+      ],
+      "route-18": [
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        },
+        {
+          "pokemonId": 20,
+          "name": "Raticate"
+        },
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 22,
+          "name": "Fearow"
+        },
+        {
+          "pokemonId": 84,
+          "name": "Doduo"
+        }
+      ],
+      "fuschia-city": [
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 60,
+          "name": "Poliwag"
+        },
+        {
+          "pokemonId": 118,
+          "name": "Goldeen"
+        },
+        {
+          "pokemonId": 119,
+          "name": "Seaking"
+        }
+      ],
+      "safari-zone": [
+        {
+          "pokemonId": 29,
+          "name": "Nidoran♀"
+        },
+        {
+          "pokemonId": 30,
+          "name": "Nidorina"
+        },
+        {
+          "pokemonId": 32,
+          "name": "Nidoran♂"
+        },
+        {
+          "pokemonId": 33,
+          "name": "Nidorino"
+        },
+        {
+          "pokemonId": 46,
+          "name": "Paras"
+        },
+        {
+          "pokemonId": 47,
+          "name": "Parasect"
+        },
+        {
+          "pokemonId": 48,
+          "name": "Venonat"
+        },
+        {
+          "pokemonId": 49,
+          "name": "Venomoth"
+        },
+        {
+          "pokemonId": 84,
+          "name": "Doduo"
+        },
+        {
+          "pokemonId": 102,
+          "name": "Exeggcute"
+        },
+        {
+          "pokemonId": 111,
+          "name": "Rhyhorn"
+        },
+        {
+          "pokemonId": 113,
+          "name": "Chansey"
+        },
+        {
+          "pokemonId": 114,
+          "name": "Tangela"
+        },
+        {
+          "pokemonId": 115,
+          "name": "Kangaskhan"
+        },
+        {
+          "pokemonId": 123,
+          "name": "Scyther"
+        },
+        {
+          "pokemonId": 127,
+          "name": "Pinsir"
+        },
+        {
+          "pokemonId": 128,
+          "name": "Tauros"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 118,
+          "name": "Goldeen"
+        },
+        {
+          "pokemonId": 119,
+          "name": "Seaking"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        },
+        {
+          "pokemonId": 79,
+          "name": "Slowpoke"
+        },
+        {
+          "pokemonId": 147,
+          "name": "Dratini"
+        },
+        {
+          "pokemonId": 148,
+          "name": "Dragonair"
+        }
+      ],
+      "route-15": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 17,
+          "name": "Pidgeotto"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 44,
+          "name": "Gloom"
+        },
+        {
+          "pokemonId": 48,
+          "name": "Venonat"
+        },
+        {
+          "pokemonId": 132,
+          "name": "Ditto"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        },
+        {
+          "pokemonId": 70,
+          "name": "Weepinbell"
+        }
+      ],
+      "route-14": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 17,
+          "name": "Pidgeotto"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 44,
+          "name": "Gloom"
+        },
+        {
+          "pokemonId": 48,
+          "name": "Venonat"
+        },
+        {
+          "pokemonId": 132,
+          "name": "Ditto"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        },
+        {
+          "pokemonId": 70,
+          "name": "Weepinbell"
+        }
+      ],
+      "route-13": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 17,
+          "name": "Pidgeotto"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 44,
+          "name": "Gloom"
+        },
+        {
+          "pokemonId": 48,
+          "name": "Venonat"
+        },
+        {
+          "pokemonId": 132,
+          "name": "Ditto"
+        },
+        {
+          "pokemonId": 69,
+          "name": "Bellsprout"
+        },
+        {
+          "pokemonId": 70,
+          "name": "Weepinbell"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 118,
+          "name": "Goldeen"
+        },
+        {
+          "pokemonId": 116,
+          "name": "Horsea"
+        }
+      ],
+      "power-plant": [
+        {
+          "pokemonId": 25,
+          "name": "Pikachu"
+        },
+        {
+          "pokemonId": 81,
+          "name": "Magnemite"
+        },
+        {
+          "pokemonId": 82,
+          "name": "Magneton"
+        },
+        {
+          "pokemonId": 100,
+          "name": "Voltorb"
+        },
+        {
+          "pokemonId": 101,
+          "name": "Electrode"
+        },
+        {
+          "pokemonId": 145,
+          "name": "Zapdos"
+        }
+      ],
+      "route-19": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        },
+        {
+          "pokemonId": 116,
+          "name": "Horsea"
+        },
+        {
+          "pokemonId": 117,
+          "name": "Seadra"
+        }
+      ],
+      "route-20": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        },
+        {
+          "pokemonId": 116,
+          "name": "Horsea"
+        },
+        {
+          "pokemonId": 117,
+          "name": "Seadra"
+        }
+      ],
+      "seafoam-islands": [
+        {
+          "pokemonId": 41,
+          "name": "Zubat"
+        },
+        {
+          "pokemonId": 42,
+          "name": "Golbat"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        },
+        {
+          "pokemonId": 55,
+          "name": "Golduck"
+        },
+        {
+          "pokemonId": 86,
+          "name": "Seel"
+        },
+        {
+          "pokemonId": 87,
+          "name": "Dewgong"
+        },
+        {
+          "pokemonId": 90,
+          "name": "Shellder"
+        },
+        {
+          "pokemonId": 91,
+          "name": "Cloyster"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        },
+        {
+          "pokemonId": 116,
+          "name": "Horsea"
+        },
+        {
+          "pokemonId": 117,
+          "name": "Seadra"
+        },
+        {
+          "pokemonId": 144,
+          "name": "Articuno"
+        }
+      ],
+      "cinnabar-island": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 90,
+          "name": "Shellder"
+        }
+      ],
+      "pokemon-mansion": [
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        },
+        {
+          "pokemonId": 20,
+          "name": "Raticate"
+        },
+        {
+          "pokemonId": 58,
+          "name": "Growlithe"
+        },
+        {
+          "pokemonId": 77,
+          "name": "Ponyta"
+        },
+        {
+          "pokemonId": 88,
+          "name": "Grimer"
+        },
+        {
+          "pokemonId": 89,
+          "name": "Muk"
+        },
+        {
+          "pokemonId": 109,
+          "name": "Koffing"
+        },
+        {
+          "pokemonId": 110,
+          "name": "Weezing"
+        },
+        {
+          "pokemonId": 132,
+          "name": "Ditto"
+        }
+      ],
+      "one-island": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 90,
+          "name": "Shellder"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        },
+        {
+          "pokemonId": 118,
+          "name": "Goldeen"
+        }
+      ],
+      "two-island": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 90,
+          "name": "Shellder"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        },
+        {
+          "pokemonId": 118,
+          "name": "Goldeen"
+        }
+      ],
+      "three-island": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 17,
+          "name": "Pidgeotto"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 44,
+          "name": "Gloom"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        },
+        {
+          "pokemonId": 55,
+          "name": "Golduck"
+        },
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 96,
+          "name": "Drowzee"
+        },
+        {
+          "pokemonId": 97,
+          "name": "Hypno"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 90,
+          "name": "Shellder"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        }
+      ],
+      "route-21": [
+        {
+          "pokemonId": 16,
+          "name": "Pidgey"
+        },
+        {
+          "pokemonId": 17,
+          "name": "Pidgeotto"
+        },
+        {
+          "pokemonId": 19,
+          "name": "Rattata"
+        },
+        {
+          "pokemonId": 20,
+          "name": "Raticate"
+        },
+        {
+          "pokemonId": 114,
+          "name": "Tangela"
+        },
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        },
+        {
+          "pokemonId": 116,
+          "name": "Horsea"
+        },
+        {
+          "pokemonId": 117,
+          "name": "Seadra"
+        }
+      ],
+      "route-23": [
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 22,
+          "name": "Fearow"
+        },
+        {
+          "pokemonId": 23,
+          "name": "Ekans"
+        },
+        {
+          "pokemonId": 24,
+          "name": "Arbok"
+        },
+        {
+          "pokemonId": 27,
+          "name": "Sandshrew"
+        },
+        {
+          "pokemonId": 28,
+          "name": "Sandslash"
+        },
+        {
+          "pokemonId": 56,
+          "name": "Mankey"
+        },
+        {
+          "pokemonId": 57,
+          "name": "Primeape"
+        },
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 60,
+          "name": "Poliwag"
+        },
+        {
+          "pokemonId": 61,
+          "name": "Poliwhirl"
+        }
+      ],
+      "indigo-plateau": [],
+      "victory-road": [
+        {
+          "pokemonId": 41,
+          "name": "Zubat"
+        },
+        {
+          "pokemonId": 42,
+          "name": "Golbat"
+        },
+        {
+          "pokemonId": 66,
+          "name": "Machop"
+        },
+        {
+          "pokemonId": 67,
+          "name": "Machoke"
+        },
+        {
+          "pokemonId": 74,
+          "name": "Geodude"
+        },
+        {
+          "pokemonId": 75,
+          "name": "Graveler"
+        },
+        {
+          "pokemonId": 95,
+          "name": "Onix"
+        },
+        {
+          "pokemonId": 105,
+          "name": "Marowak"
+        },
+        {
+          "pokemonId": 146,
+          "name": "Moltres"
+        }
+      ],
+      "four-island": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 90,
+          "name": "Shellder"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        },
+        {
+          "pokemonId": 183,
+          "name": "Marill"
+        },
+        {
+          "pokemonId": 184,
+          "name": "Azumarill"
+        }
+      ],
+      "five-island": [
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 90,
+          "name": "Shellder"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        },
+        {
+          "pokemonId": 161,
+          "name": "Sentret"
+        },
+        {
+          "pokemonId": 162,
+          "name": "Furret"
+        },
+        {
+          "pokemonId": 187,
+          "name": "Hoppip"
+        },
+        {
+          "pokemonId": 188,
+          "name": "Skiploom"
+        }
+      ],
+      "six-island": [
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 22,
+          "name": "Fearow"
+        },
+        {
+          "pokemonId": 43,
+          "name": "Oddish"
+        },
+        {
+          "pokemonId": 44,
+          "name": "Gloom"
+        },
+        {
+          "pokemonId": 165,
+          "name": "Ledyba"
+        },
+        {
+          "pokemonId": 167,
+          "name": "Spinarak"
+        },
+        {
+          "pokemonId": 191,
+          "name": "Sunkern"
+        },
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        }
+      ],
+      "seven-island": [
+        {
+          "pokemonId": 21,
+          "name": "Spearow"
+        },
+        {
+          "pokemonId": 22,
+          "name": "Fearow"
+        },
+        {
+          "pokemonId": 27,
+          "name": "Sandshrew"
+        },
+        {
+          "pokemonId": 28,
+          "name": "Sandslash"
+        },
+        {
+          "pokemonId": 56,
+          "name": "Mankey"
+        },
+        {
+          "pokemonId": 57,
+          "name": "Primeape"
+        },
+        {
+          "pokemonId": 216,
+          "name": "Teddiursa"
+        },
+        {
+          "pokemonId": 217,
+          "name": "Ursaring"
+        },
+        {
+          "pokemonId": 225,
+          "name": "Delibird"
+        },
+        {
+          "pokemonId": 227,
+          "name": "Skarmory"
+        },
+        {
+          "pokemonId": 72,
+          "name": "Tentacool"
+        },
+        {
+          "pokemonId": 73,
+          "name": "Tentacruel"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 98,
+          "name": "Krabby"
+        },
+        {
+          "pokemonId": 99,
+          "name": "Kingler"
+        }
+      ],
+      "cerulean-cave": [
+        {
+          "pokemonId": 42,
+          "name": "Golbat"
+        },
+        {
+          "pokemonId": 47,
+          "name": "Parasect"
+        },
+        {
+          "pokemonId": 49,
+          "name": "Venomoth"
+        },
+        {
+          "pokemonId": 64,
+          "name": "Kadabra"
+        },
+        {
+          "pokemonId": 75,
+          "name": "Graveler"
+        },
+        {
+          "pokemonId": 82,
+          "name": "Magneton"
+        },
+        {
+          "pokemonId": 85,
+          "name": "Dodrio"
+        },
+        {
+          "pokemonId": 101,
+          "name": "Electrode"
+        },
+        {
+          "pokemonId": 105,
+          "name": "Marowak"
+        },
+        {
+          "pokemonId": 112,
+          "name": "Rhydon"
+        },
+        {
+          "pokemonId": 113,
+          "name": "Chansey"
+        },
+        {
+          "pokemonId": 132,
+          "name": "Ditto"
+        },
+        {
+          "pokemonId": 202,
+          "name": "Wobbuffet"
+        },
+        {
+          "pokemonId": 150,
+          "name": "Mewtwo"
+        },
+        {
+          "pokemonId": 54,
+          "name": "Psyduck"
+        },
+        {
+          "pokemonId": 55,
+          "name": "Golduck"
+        },
+        {
+          "pokemonId": 129,
+          "name": "Magikarp"
+        },
+        {
+          "pokemonId": 60,
+          "name": "Poliwag"
+        },
+        {
+          "pokemonId": 61,
+          "name": "Poliwhirl"
+        }
+      ]
+    }
+  }

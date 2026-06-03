@@ -7,10 +7,13 @@ import {
   Pressable,
   Image,
   Share,
+  ScrollView,
 } from 'react-native';
 
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import fireRedEncounters from '../data/firered_encounters.json';
 
 export default function RouteDetailScreen({ route }) {
   const { routeItem } = route.params;
@@ -22,6 +25,11 @@ export default function RouteDetailScreen({ route }) {
   const [loading, setLoading] = useState(false);
 
   const STORAGE_KEY = 'encounters';
+
+  const availablePokemon =
+    fireRedEncounters.encounters?.[routeItem.id] ||
+    fireRedEncounters[routeItem.id] ||
+    [];
 
   useEffect(() => {
     loadEncounter();
@@ -132,12 +140,43 @@ export default function RouteDetailScreen({ route }) {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>{routeItem.name}</Text>
 
       <Text style={styles.meta}>
         {routeItem.types.join(', ')}
       </Text>
+
+      <Text style={styles.sectionTitle}>
+        Available Pokémon
+      </Text>
+
+      <View style={styles.availableBox}>
+        {availablePokemon.length > 0 ? (
+          availablePokemon.map((pokemon) => (
+            <Pressable
+              key={pokemon.pokemonId}
+              style={styles.availableRow}
+              onPress={() => setPokemonName(pokemon.name)}
+            >
+              <Image
+                source={{
+                  uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonId}.png`,
+                }}
+                style={styles.availableSprite}
+              />
+
+              <Text style={styles.availablePokemon}>
+                {pokemon.name}
+              </Text>
+            </Pressable>
+          ))
+        ) : (
+          <Text style={styles.availablePokemon}>
+            No encounter data available.
+          </Text>
+        )}
+      </View>
 
       <TextInput
         style={styles.input}
@@ -246,7 +285,7 @@ export default function RouteDetailScreen({ route }) {
           </View>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 }
 
@@ -266,6 +305,37 @@ const styles = StyleSheet.create({
   meta: {
     color: '#666',
     marginBottom: 20,
+  },
+
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 8,
+  },
+
+  availableBox: {
+    backgroundColor: '#fff',
+    padding: 14,
+    borderRadius: 12,
+    marginBottom: 20,
+  },
+
+  availableRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+    paddingVertical: 4,
+  },
+
+  availableSprite: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+  },
+
+  availablePokemon: {
+    fontSize: 16,
+    textTransform: 'capitalize',
   },
 
   input: {
@@ -318,6 +388,7 @@ const styles = StyleSheet.create({
 
   resultBox: {
     marginTop: 24,
+    marginBottom: 40,
     backgroundColor: '#fff',
     padding: 14,
     borderRadius: 12,
@@ -337,6 +408,7 @@ const styles = StyleSheet.create({
   result: {
     fontSize: 16,
     marginBottom: 4,
+    textTransform: 'capitalize',
   },
 
   shareButton: {
