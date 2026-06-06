@@ -1,9 +1,9 @@
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 export default function SettingsScreen({ navigation, onLogout }) {
   const logout = async () => {
-    await SecureStore.deleteItemAsync('username');
+    await SecureStore.deleteItemAsync('sessionUser');
     onLogout();
   };
 
@@ -15,19 +15,13 @@ export default function SettingsScreen({ navigation, onLogout }) {
     <View style={styles.container}>
       <Text style={styles.title}>Settings</Text>
 
-      <View style={styles.button}>
-        <Button
-          title="Back to Game Select"
-          onPress={goToRunList}
-        />
-      </View>
+      <Pressable style={styles.button} onPress={goToRunList}>
+        <Text style={styles.buttonText}>Back to Game Select</Text>
+      </Pressable>
 
-      <View style={styles.button}>
-        <Button
-          title="Logout"
-          onPress={logout}
-        />
-      </View>
+      <Pressable style={styles.logoutButton} onPress={logout}>
+        <Text style={styles.logoutText}>Logout</Text>
+      </Pressable>
     </View>
   );
 }
@@ -36,14 +30,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#A7F3D0',
   },
+
   title: {
-    fontSize: 24,
-    fontWeight: '700',
+    fontSize: 28,
+    fontWeight: '900',
     marginBottom: 16,
+    color: '#111827',
   },
+
   button: {
+    backgroundColor: '#166534',
+    padding: 15,
+    borderRadius: 16,
+    alignItems: 'center',
     marginBottom: 12,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontWeight: '900',
+  },
+
+  logoutButton: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 16,
+    alignItems: 'center',
+  },
+
+  logoutText: {
+    color: '#B91C1C',
+    fontWeight: '900',
   },
 });

@@ -27,10 +27,10 @@ export default function App() {
 
   const checkLogin = async () => {
     try {
-      const storedUsername = await SecureStore.getItemAsync('username');
+      const sessionUser = await SecureStore.getItemAsync('sessionUser');
 
-      if (storedUsername) {
-        setUser(storedUsername);
+      if (sessionUser) {
+        setUser(sessionUser);
       }
     } catch (e) {
       console.log('Error checking login', e);
@@ -39,16 +39,15 @@ export default function App() {
     }
   };
 
+  const logout = async () => {
+    await SecureStore.deleteItemAsync('sessionUser');
+    setUser(null);
+  };
+
   if (checkingLogin) {
     return (
       <SafeAreaProvider>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator />
           <Text style={{ marginTop: 12 }}>Checking login...</Text>
         </View>
@@ -61,28 +60,15 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           {!user ? (
-            <Stack.Screen
-              name="Login"
-              options={{ headerShown: false }}
-            >
+            <Stack.Screen name="Login" options={{ headerShown: false }}>
               {() => <LoginScreen onLogin={setUser} />}
             </Stack.Screen>
           ) : (
             <>
-              <Stack.Screen
-                name="RunList"
-                component={RunListScreen}
-              />
+              <Stack.Screen name="RunList" component={RunListScreen} />
 
-              <Stack.Screen
-                name="AppDrawer"
-                options={{ headerShown: false }}
-              >
-                {() => (
-                  <AppDrawer
-                    onLogout={() => setUser(null)}
-                  />
-                )}
+              <Stack.Screen name="AppDrawer" options={{ headerShown: false }}>
+                {() => <AppDrawer onLogout={logout} />}
               </Stack.Screen>
 
               <Stack.Screen
