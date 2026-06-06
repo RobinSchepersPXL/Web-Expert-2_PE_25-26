@@ -8,7 +8,8 @@ import {
   Modal,
 } from 'react-native';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const games = [
@@ -69,6 +70,37 @@ const starters = [
 
 export default function RunListScreen({ navigation }) {
   const [starterModalVisible, setStarterModalVisible] = useState(false);
+  const [starter, setStarter] = useState('Unknown');
+  const [caughtCount, setCaughtCount] = useState(0);
+  const [gymsDefeated, setGymsDefeated] = useState(0);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadRunSummary();
+    }, [])
+  );
+
+  const loadRunSummary = async () => {
+    try {
+      const savedStarter = await AsyncStorage.getItem('starter');
+      setStarter(savedStarter || 'Unknown');
+
+      const encounterData = await AsyncStorage.getItem('encounters');
+      const encounters = encounterData ? JSON.parse(encounterData) : {};
+      const encounterList = Object.values(encounters);
+
+      setCaughtCount(
+        encounterList.filter((item) => item.status === 'caught').length
+      );
+
+      const defeatedData = await AsyncStorage.getItem('defeatedBosses');
+      const defeated = defeatedData ? JSON.parse(defeatedData) : [];
+
+      setGymsDefeated(defeated.length);
+    } catch (e) {
+      console.log('Error loading run summary', e);
+    }
+  };
 
   const openRun = () => {
     navigation.navigate('AppDrawer');
@@ -78,11 +110,15 @@ export default function RunListScreen({ navigation }) {
     setStarterModalVisible(true);
   };
 
-  const selectStarter = async (starter) => {
+  const selectStarter = async (starterChoice) => {
     await AsyncStorage.removeItem('encounters');
     await AsyncStorage.removeItem('defeatedBosses');
 
-    await AsyncStorage.setItem('starter', starter.id);
+    await AsyncStorage.setItem('starter', starterChoice.id);
+
+    setStarter(starterChoice.id);
+    setCaughtCount(0);
+    setGymsDefeated(0);
 
     setStarterModalVisible(false);
     navigation.navigate('AppDrawer');
@@ -102,7 +138,23 @@ export default function RunListScreen({ navigation }) {
       <View style={styles.heroCard}>
         <Text style={styles.heroLabel}>Current Run</Text>
         <Text style={styles.heroTitle}>Pokémon FireRed</Text>
-        <Text style={styles.heroText}>Continue your active Kanto journey.</Text>
+
+        <View style={styles.summaryRow}>
+          <View style={styles.summaryItem}>
+            <Text style={styles.summaryLabel}>Starter</Text>
+            <Text style={styles.summaryValue}>{starter}</Text>
+          </View>
+
+          <View style={styles.summaryItem}>
+            <Text style={styles.summaryLabel}>Caught</Text>
+            <Text style={styles.summaryValue}>{caughtCount}</Text>
+          </View>
+
+          <View style={styles.summaryItem}>
+            <Text style={styles.summaryLabel}>Gyms</Text>
+            <Text style={styles.summaryValue}>{gymsDefeated}</Text>
+          </View>
+        </View>
 
         <Pressable style={styles.primaryButton} onPress={openRun}>
           <Text style={styles.primaryButtonText}>Continue Run</Text>
@@ -113,6 +165,7 @@ export default function RunListScreen({ navigation }) {
         <Pressable style={styles.actionCard} onPress={startNewRun}>
           <Text style={styles.actionTitle}>New Run</Text>
           <Text style={styles.actionText}>Choose starter</Text>
+          <Text style={styles.starterIcons}>🌱 🔥 💧</Text>
         </Pressable>
 
         <Pressable style={[styles.actionCard, styles.disabledCard]} disabled>
@@ -127,6 +180,7 @@ export default function RunListScreen({ navigation }) {
         data={games}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <Pressable
             style={[styles.gameCard, !item.available && styles.disabledGameCard]}
@@ -168,17 +222,22 @@ export default function RunListScreen({ navigation }) {
               This also changes Champion Blue’s final team.
             </Text>
 
-            {starters.map((starter) => (
+            {starters.map((starterChoice) => (
               <Pressable
-                key={starter.id}
+                key={starterChoice.id}
                 style={styles.starterCard}
-                onPress={() => selectStarter(starter)}
+                onPress={() => selectStarter(starterChoice)}
               >
-                <Image source={{ uri: starter.sprite }} style={styles.starterImage} />
+                <Image
+                  source={{ uri: starterChoice.sprite }}
+                  style={styles.starterImage}
+                />
 
                 <View>
-                  <Text style={styles.starterName}>{starter.name}</Text>
-                  <Text style={styles.starterText}>Start with {starter.name}</Text>
+                  <Text style={styles.starterName}>{starterChoice.name}</Text>
+                  <Text style={styles.starterText}>
+                    Start with {starterChoice.name}
+                  </Text>
                 </View>
               </Pressable>
             ))}
@@ -199,7 +258,7 @@ export default function RunListScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f7',
+    backgroundColor: '#A7F3D0',
     paddingTop: 70,
     paddingHorizontal: 18,
   },
@@ -208,26 +267,28 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: '900',
     letterSpacing: -0.8,
+    color: '#111827',
   },
 
   subtitle: {
     fontSize: 16,
-    color: '#6d6d72',
+    color: '#374151',
     marginTop: 6,
     marginBottom: 22,
+    fontWeight: '600',
   },
 
   heroCard: {
-    backgroundColor: '#111',
+    backgroundColor: '#111827',
     borderRadius: 24,
     padding: 20,
     marginBottom: 14,
   },
 
   heroLabel: {
-    color: '#aaa',
+    color: '#9CA3AF',
     fontSize: 13,
-    fontWeight: '700',
+    fontWeight: '800',
     textTransform: 'uppercase',
     letterSpacing: 0.6,
   },
@@ -239,21 +300,44 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
 
-  heroText: {
-    color: '#ccc',
-    marginTop: 6,
+  summaryRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 16,
     marginBottom: 16,
   },
 
+  summaryItem: {
+    flex: 1,
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    borderRadius: 14,
+    padding: 10,
+  },
+
+  summaryLabel: {
+    color: '#9CA3AF',
+    fontSize: 11,
+    fontWeight: '800',
+    textTransform: 'uppercase',
+  },
+
+  summaryValue: {
+    color: '#fff',
+    marginTop: 4,
+    fontSize: 15,
+    fontWeight: '900',
+    textTransform: 'capitalize',
+  },
+
   primaryButton: {
-    backgroundColor: '#fff',
+    backgroundColor: '#22C55E',
     borderRadius: 14,
     paddingVertical: 13,
     alignItems: 'center',
   },
 
   primaryButtonText: {
-    color: '#111',
+    color: '#fff',
     fontWeight: '900',
   },
 
@@ -273,11 +357,18 @@ const styles = StyleSheet.create({
   actionTitle: {
     fontSize: 17,
     fontWeight: '900',
+    color: '#111827',
   },
 
   actionText: {
-    color: '#6d6d72',
+    color: '#6B7280',
     marginTop: 4,
+    fontWeight: '600',
+  },
+
+  starterIcons: {
+    marginTop: 10,
+    fontSize: 18,
   },
 
   disabledCard: {
@@ -288,6 +379,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '900',
     marginBottom: 12,
+    color: '#111827',
   },
 
   list: {
@@ -317,7 +409,7 @@ const styles = StyleSheet.create({
     width: 54,
     height: 54,
     borderRadius: 16,
-    backgroundColor: '#f2f2f7',
+    backgroundColor: '#F0FDF4',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 14,
@@ -330,23 +422,25 @@ const styles = StyleSheet.create({
 
   gameName: {
     fontSize: 17,
-    fontWeight: '800',
+    fontWeight: '900',
+    color: '#111827',
   },
 
   gameSubtitle: {
     marginTop: 4,
-    color: '#6d6d72',
+    color: '#6B7280',
+    fontWeight: '600',
   },
 
   openBadge: {
     fontWeight: '900',
-    color: '#111',
+    color: '#22C55E',
     fontSize: 12,
   },
 
   comingSoon: {
     fontWeight: '900',
-    color: '#777',
+    color: '#9CA3AF',
     fontSize: 12,
   },
 
@@ -357,7 +451,7 @@ const styles = StyleSheet.create({
   },
 
   modalBox: {
-    backgroundColor: '#f2f2f7',
+    backgroundColor: '#A7F3D0',
     padding: 20,
     borderTopLeftRadius: 28,
     borderTopRightRadius: 28,
@@ -367,20 +461,23 @@ const styles = StyleSheet.create({
     width: 42,
     height: 5,
     borderRadius: 999,
-    backgroundColor: '#c7c7cc',
+    backgroundColor: '#6B7280',
     alignSelf: 'center',
     marginBottom: 16,
+    opacity: 0.5,
   },
 
   modalTitle: {
     fontSize: 25,
     fontWeight: '900',
+    color: '#111827',
   },
 
   modalText: {
-    color: '#6d6d72',
+    color: '#374151',
     marginTop: 6,
     marginBottom: 16,
+    fontWeight: '600',
   },
 
   starterCard: {
@@ -401,11 +498,13 @@ const styles = StyleSheet.create({
   starterName: {
     fontSize: 18,
     fontWeight: '900',
+    color: '#111827',
   },
 
   starterText: {
-    color: '#6d6d72',
+    color: '#6B7280',
     marginTop: 4,
+    fontWeight: '600',
   },
 
   cancelButton: {
@@ -416,6 +515,6 @@ const styles = StyleSheet.create({
 
   cancelText: {
     fontWeight: '900',
-    color: '#111',
+    color: '#166534',
   },
 });

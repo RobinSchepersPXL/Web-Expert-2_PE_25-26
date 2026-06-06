@@ -64,8 +64,8 @@ export default function CapDetailScreen({ route }) {
 
       if (!data) return;
 
-      const bosses = JSON.parse(data);
-      setIsDefeated(bosses.includes(capItem.id));
+      const gyms = JSON.parse(data);
+      setIsDefeated(gyms.includes(capItem.id));
     } catch (e) {
       console.log('Error loading defeated status', e);
     }
@@ -74,19 +74,19 @@ export default function CapDetailScreen({ route }) {
   const toggleDefeated = async () => {
     try {
       const data = await AsyncStorage.getItem('defeatedBosses');
-      let bosses = data ? JSON.parse(data) : [];
+      let gyms = data ? JSON.parse(data) : [];
 
-      if (bosses.includes(capItem.id)) {
-        bosses = bosses.filter((id) => id !== capItem.id);
+      if (gyms.includes(capItem.id)) {
+        gyms = gyms.filter((id) => id !== capItem.id);
         setIsDefeated(false);
       } else {
-        bosses.push(capItem.id);
+        gyms.push(capItem.id);
         setIsDefeated(true);
       }
 
-      await AsyncStorage.setItem('defeatedBosses', JSON.stringify(bosses));
+      await AsyncStorage.setItem('defeatedBosses', JSON.stringify(gyms));
     } catch (e) {
-      console.log('Error updating boss status', e);
+      console.log('Error updating gym status', e);
     }
   };
 
@@ -98,6 +98,13 @@ export default function CapDetailScreen({ route }) {
     return capItem.team;
   };
 
+  const getStatLabel = (stat) => {
+    if (stat === 'spAttack' || stat === 'specialAttack') return 'Sp. Atk';
+    if (stat === 'spDefense' || stat === 'specialDefense') return 'Sp. Def';
+    if (stat === 'hp') return 'HP';
+    return stat.toUpperCase();
+  };
+
   const team = getTeam();
 
   const togglePokemon = (index) => {
@@ -106,15 +113,21 @@ export default function CapDetailScreen({ route }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{capItem.name}</Text>
-      <Text style={styles.location}>{capItem.location}</Text>
-      <Text style={styles.cap}>Level Cap: {capItem.cap}</Text>
+      <View style={styles.heroCard}>
+        <Text style={styles.heroLabel}>LEVEL CAP</Text>
+        <Text style={styles.heroTitle}>{capItem.name}</Text>
+        <Text style={styles.heroLocation}>{capItem.location}</Text>
 
-      {capItem.id === 'champion-blue' && (
-        <Text style={styles.starterNote}>
-          Your starter: {starter || 'loading...'}
-        </Text>
-      )}
+        <View style={styles.heroBottomRow}>
+          <Text style={styles.heroCap}>Lv. {capItem.cap}</Text>
+
+          {capItem.id === 'champion-blue' && (
+            <Text style={styles.starterNote}>
+              Starter: {starter || 'loading...'}
+            </Text>
+          )}
+        </View>
+      </View>
 
       <Pressable
         style={[
@@ -138,18 +151,22 @@ export default function CapDetailScreen({ route }) {
       <FlatList
         data={team}
         keyExtractor={(item, index) => `${item.pokemonId}-${index}`}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.list}
         renderItem={({ item, index }) => {
           const isOpen = selectedPokemon === index;
 
           return (
             <Pressable style={styles.card} onPress={() => togglePokemon(index)}>
               <View style={styles.cardTop}>
-                <Image
-                  source={{
-                    uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.pokemonId}.png`,
-                  }}
-                  style={styles.sprite}
-                />
+                <View style={styles.spriteBox}>
+                  <Image
+                    source={{
+                      uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.pokemonId}.png`,
+                    }}
+                    style={styles.sprite}
+                  />
+                </View>
 
                 <View style={styles.info}>
                   <Text style={styles.pokemon}>{item.name}</Text>
@@ -164,11 +181,13 @@ export default function CapDetailScreen({ route }) {
                   <Text style={styles.detailTitle}>Moves</Text>
 
                   {item.moves?.length > 0 ? (
-                    item.moves.map((move) => (
-                      <Text key={move} style={styles.detailText}>
-                        • {move}
-                      </Text>
-                    ))
+                    <View style={styles.movesContainer}>
+                      {item.moves.map((move) => (
+                        <View key={move} style={styles.moveBadge}>
+                          <Text style={styles.moveText}>{move}</Text>
+                        </View>
+                      ))}
+                    </View>
                   ) : (
                     <Text style={styles.detailText}>No moves added yet.</Text>
                   )}
@@ -180,7 +199,9 @@ export default function CapDetailScreen({ route }) {
                       <View style={styles.statsGrid}>
                         {Object.entries(item.baseStats).map(([stat, value]) => (
                           <View key={stat} style={styles.statBox}>
-                            <Text style={styles.statLabel}>{stat}</Text>
+                            <Text style={styles.statLabel}>
+                              {getStatLabel(stat)}
+                            </Text>
                             <Text style={styles.statValue}>{value}</Text>
                           </View>
                         ))}
@@ -198,91 +219,201 @@ export default function CapDetailScreen({ route }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#f6f6f6' },
-  title: { fontSize: 28, fontWeight: '700' },
-  location: { marginTop: 4, color: '#666' },
-  cap: { marginTop: 12, fontSize: 18, fontWeight: '700' },
-  starterNote: {
-    marginTop: 8,
-    color: '#666',
-    fontWeight: '600',
-    textTransform: 'capitalize',
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#A7F3D0',
   },
-  defeatButton: {
-    marginTop: 12,
-    backgroundColor: '#fff',
-    padding: 12,
-    borderRadius: 12,
-    alignItems: 'center',
+
+  heroCard: {
+    backgroundColor: '#111827',
+    borderRadius: 24,
+    padding: 20,
+    marginBottom: 12,
   },
-  defeatButtonActive: {
-    backgroundColor: '#111',
+
+  heroLabel: {
+    color: '#9CA3AF',
+    fontSize: 12,
+    fontWeight: '900',
+    letterSpacing: 0.6,
   },
-  defeatButtonText: {
+
+  heroTitle: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: '900',
+    marginTop: 6,
+  },
+
+  heroLocation: {
+    color: '#D1D5DB',
+    marginTop: 4,
     fontWeight: '700',
   },
+
+  heroBottomRow: {
+    marginTop: 14,
+  },
+
+  heroCap: {
+    color: '#22C55E',
+    fontSize: 28,
+    fontWeight: '900',
+  },
+
+  starterNote: {
+    color: '#D1D5DB',
+    marginTop: 6,
+    fontWeight: '700',
+    textTransform: 'capitalize',
+  },
+
+  defeatButton: {
+    backgroundColor: '#fff',
+    padding: 14,
+    borderRadius: 16,
+    alignItems: 'center',
+    marginBottom: 18,
+  },
+
+  defeatButtonActive: {
+    backgroundColor: '#22C55E',
+  },
+
+  defeatButtonText: {
+    fontWeight: '900',
+    color: '#111827',
+  },
+
   defeatButtonTextActive: {
     color: '#fff',
   },
+
   subtitle: {
-    marginTop: 24,
     marginBottom: 12,
-    fontSize: 20,
-    fontWeight: '700',
+    fontSize: 22,
+    fontWeight: '900',
+    color: '#111827',
   },
+
+  list: {
+    paddingBottom: 30,
+  },
+
   card: {
     backgroundColor: '#fff',
     padding: 14,
-    borderRadius: 12,
+    borderRadius: 18,
     marginBottom: 10,
   },
+
   cardTop: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  sprite: { width: 56, height: 56, marginRight: 12 },
-  info: { flex: 1 },
-  pokemon: { fontSize: 18, fontWeight: '700' },
-  level: { marginTop: 4, color: '#666' },
+
+  spriteBox: {
+    width: 58,
+    height: 58,
+    borderRadius: 16,
+    backgroundColor: '#F0FDF4',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+
+  sprite: {
+    width: 54,
+    height: 54,
+  },
+
+  info: {
+    flex: 1,
+  },
+
+  pokemon: {
+    fontSize: 18,
+    fontWeight: '900',
+    color: '#111827',
+  },
+
+  level: {
+    marginTop: 4,
+    color: '#6B7280',
+    fontWeight: '700',
+  },
+
   expand: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#666',
+    fontWeight: '900',
+    color: '#6B7280',
   },
+
   details: {
     marginTop: 14,
     borderTopWidth: 1,
-    borderTopColor: '#eee',
+    borderTopColor: '#E5E7EB',
     paddingTop: 12,
   },
+
   detailTitle: {
-    fontWeight: '800',
-    marginBottom: 8,
+    fontWeight: '900',
+    fontSize: 17,
+    marginBottom: 10,
     marginTop: 8,
+    color: '#111827',
   },
+
+  movesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 8,
+  },
+
+  moveBadge: {
+    backgroundColor: '#E5E7EB',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 999,
+  },
+
+  moveText: {
+    color: '#111827',
+    fontWeight: '800',
+    fontSize: 13,
+  },
+
   detailText: {
-    color: '#444',
+    color: '#374151',
     marginBottom: 4,
+    fontWeight: '600',
   },
+
   statsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
   },
+
   statBox: {
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#F0FDF4',
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 12,
     minWidth: '30%',
   },
+
   statLabel: {
-    color: '#666',
-    fontSize: 12,
-    textTransform: 'uppercase',
+    color: '#6B7280',
+    fontSize: 11,
+    fontWeight: '900',
   },
+
   statValue: {
-    fontWeight: '800',
+    fontWeight: '900',
     fontSize: 16,
     marginTop: 2,
+    color: '#111827',
   },
 });
