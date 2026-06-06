@@ -1,6 +1,7 @@
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen({ onLogin }) {
   const [isRegistered, setIsRegistered] = useState(false);
@@ -58,6 +59,21 @@ export default function LoginScreen({ onLogin }) {
     onLogin(username.trim());
   };
 
+  const resetAccount = async () => {
+    await SecureStore.deleteItemAsync('username');
+    await SecureStore.deleteItemAsync('password');
+    await SecureStore.deleteItemAsync('sessionUser');
+
+    await AsyncStorage.removeItem('starter');
+    await AsyncStorage.removeItem('encounters');
+    await AsyncStorage.removeItem('defeatedBosses');
+
+    setIsRegistered(false);
+    setUsername('');
+    setPassword('');
+    setError('');
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Route One</Text>
@@ -98,18 +114,7 @@ export default function LoginScreen({ onLogin }) {
       </Pressable>
 
       {isRegistered && (
-        <Pressable
-          style={styles.resetButton}
-          onPress={async () => {
-            await SecureStore.deleteItemAsync('username');
-            await SecureStore.deleteItemAsync('password');
-            await SecureStore.deleteItemAsync('sessionUser');
-            setIsRegistered(false);
-            setUsername('');
-            setPassword('');
-            setError('');
-          }}
-        >
+        <Pressable style={styles.resetButton} onPress={resetAccount}>
           <Text style={styles.resetText}>Reset account</Text>
         </Pressable>
       )}

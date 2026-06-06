@@ -71,6 +71,7 @@ const starters = [
 export default function RunListScreen({ navigation }) {
   const [starterModalVisible, setStarterModalVisible] = useState(false);
   const [starter, setStarter] = useState('Unknown');
+  const [hasRun, setHasRun] = useState(false);
   const [caughtCount, setCaughtCount] = useState(0);
   const [gymsDefeated, setGymsDefeated] = useState(0);
 
@@ -83,7 +84,14 @@ export default function RunListScreen({ navigation }) {
   const loadRunSummary = async () => {
     try {
       const savedStarter = await AsyncStorage.getItem('starter');
-      setStarter(savedStarter || 'Unknown');
+
+      if (savedStarter) {
+        setStarter(savedStarter);
+        setHasRun(true);
+      } else {
+        setStarter('Unknown');
+        setHasRun(false);
+      }
 
       const encounterData = await AsyncStorage.getItem('encounters');
       const encounters = encounterData ? JSON.parse(encounterData) : {};
@@ -103,6 +111,8 @@ export default function RunListScreen({ navigation }) {
   };
 
   const openRun = () => {
+    if (!hasRun) return;
+
     navigation.navigate('AppDrawer');
   };
 
@@ -117,6 +127,7 @@ export default function RunListScreen({ navigation }) {
     await AsyncStorage.setItem('starter', starterChoice.id);
 
     setStarter(starterChoice.id);
+    setHasRun(true);
     setCaughtCount(0);
     setGymsDefeated(0);
 
@@ -126,6 +137,11 @@ export default function RunListScreen({ navigation }) {
 
   const openGame = (game) => {
     if (!game.available) return;
+
+    if (!hasRun) {
+      setStarterModalVisible(true);
+      return;
+    }
 
     navigation.navigate('AppDrawer');
   };
@@ -137,7 +153,9 @@ export default function RunListScreen({ navigation }) {
 
       <View style={styles.heroCard}>
         <Text style={styles.heroLabel}>Current Run</Text>
-        <Text style={styles.heroTitle}>Pokémon FireRed</Text>
+        <Text style={styles.heroTitle}>
+          {hasRun ? 'Pokémon FireRed' : 'No run started'}
+        </Text>
 
         <View style={styles.summaryRow}>
           <View style={styles.summaryItem}>
@@ -147,17 +165,31 @@ export default function RunListScreen({ navigation }) {
 
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Caught</Text>
-            <Text style={styles.summaryValue}>{caughtCount}</Text>
+            <Text style={styles.summaryValue}>{hasRun ? caughtCount : '-'}</Text>
           </View>
 
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Gyms</Text>
-            <Text style={styles.summaryValue}>{gymsDefeated}</Text>
+            <Text style={styles.summaryValue}>{hasRun ? gymsDefeated : '-'}</Text>
           </View>
         </View>
 
-        <Pressable style={styles.primaryButton} onPress={openRun}>
-          <Text style={styles.primaryButtonText}>Continue Run</Text>
+        <Pressable
+          style={[
+            styles.primaryButton,
+            !hasRun && styles.primaryButtonDisabled,
+          ]}
+          onPress={openRun}
+          disabled={!hasRun}
+        >
+          <Text
+            style={[
+              styles.primaryButtonText,
+              !hasRun && styles.primaryButtonTextDisabled,
+            ]}
+          >
+            {hasRun ? 'Continue Run' : 'Start a New Run First'}
+          </Text>
         </Pressable>
       </View>
 
@@ -199,7 +231,9 @@ export default function RunListScreen({ navigation }) {
             </View>
 
             {item.available ? (
-              <Text style={styles.openBadge}>OPEN</Text>
+              <Text style={styles.openBadge}>
+                {hasRun ? 'OPEN' : 'START'}
+              </Text>
             ) : (
               <Text style={styles.comingSoon}>SOON</Text>
             )}
@@ -336,9 +370,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  primaryButtonDisabled: {
+    backgroundColor: '#E5E7EB',
+  },
+
   primaryButtonText: {
     color: '#fff',
     fontWeight: '900',
+  },
+
+  primaryButtonTextDisabled: {
+    color: '#6B7280',
   },
 
   actionRow: {
