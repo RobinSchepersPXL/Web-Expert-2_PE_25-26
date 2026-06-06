@@ -32,15 +32,32 @@ export default function RoutesScreen({ navigation }) {
     setRefreshing(false);
   };
 
+  const getStatusStyle = (status) => {
+    if (status === 'caught') return styles.statusCaught;
+    if (status === 'dead') return styles.statusDead;
+    if (status === 'failed') return styles.statusFailed;
+    return styles.statusEmpty;
+  };
+
+  const getStatusText = (status) => {
+    if (status === 'caught') return 'Caught';
+    if (status === 'dead') return 'Dead';
+    if (status === 'failed') return 'Failed';
+    return 'Open';
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>FireRed Routes</Text>
+      <Text style={styles.title}>Routes</Text>
+      <Text style={styles.subtitle}>Track every FireRed encounter</Text>
 
       <FlatList
         data={routes}
         keyExtractor={(item) => item.id}
         refreshing={refreshing}
         onRefresh={onRefresh}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.list}
         renderItem={({ item }) => {
           const encounter = encounters[item.id];
 
@@ -51,27 +68,62 @@ export default function RoutesScreen({ navigation }) {
                 navigation.navigate('RouteDetail', { routeItem: item })
               }
             >
-              <Text style={styles.routeName}>{item.name}</Text>
+              <View style={styles.cardHeader}>
+                <View style={styles.routeInfo}>
+                  <Text style={styles.routeName}>{item.name}</Text>
 
-              <Text style={styles.meta}>
-                {item.types.join(', ')} • {item.phase}
-              </Text>
+                  <Text style={styles.meta}>
+                    {item.types.join(', ')} • {item.phase}
+                  </Text>
+                </View>
+
+                <View
+                  style={[
+                    styles.statusBadge,
+                    encounter
+                      ? getStatusStyle(encounter.status)
+                      : styles.statusEmpty,
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.statusText,
+                      encounter && styles.statusTextActive,
+                    ]}
+                  >
+                    {encounter
+                      ? getStatusText(encounter.status)
+                      : 'Open'}
+                  </Text>
+                </View>
+              </View>
 
               {encounter ? (
                 <View style={styles.encounterRow}>
                   {encounter.sprite && (
-                    <Image
-                      source={{ uri: encounter.sprite }}
-                      style={styles.sprite}
-                    />
+                    <View style={styles.spriteBox}>
+                      <Image
+                        source={{ uri: encounter.sprite }}
+                        style={styles.sprite}
+                      />
+                    </View>
                   )}
 
-                  <Text style={styles.encounter}>
-                    Encounter: {encounter.pokemon} ({encounter.status})
-                  </Text>
+                  <View>
+                    <Text style={styles.encounterName}>
+                      {encounter.pokemon}
+                    </Text>
+                    <Text style={styles.encounterMeta}>
+                      Current encounter
+                    </Text>
+                  </View>
                 </View>
               ) : (
-                <Text style={styles.empty}>No encounter yet</Text>
+                <View style={styles.emptyBox}>
+                  <Text style={styles.emptyText}>
+                    No encounter registered yet
+                  </Text>
+                </View>
               )}
             </AnimatedCard>
           );
@@ -84,40 +136,131 @@ export default function RoutesScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#f6f6f6',
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    backgroundColor: '#A7F3D0',
   },
+
   title: {
-    fontSize: 24,
-    fontWeight: '700',
-    marginBottom: 16,
+    fontSize: 32,
+    fontWeight: '900',
+    letterSpacing: -0.6,
   },
-  card: {
-    padding: 14,
-  },
-  routeName: {
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  meta: {
+
+  subtitle: {
+    color: '#6d6d72',
     marginTop: 4,
-    color: '#666',
+    marginBottom: 18,
+    fontSize: 15,
   },
+
+  list: {
+    paddingBottom: 24,
+  },
+
+  card: {
+    padding: 16,
+    borderRadius: 18,
+  },
+
+  cardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    gap: 12,
+  },
+
+  routeInfo: {
+    flex: 1,
+  },
+
+  routeName: {
+    fontSize: 19,
+    fontWeight: '800',
+    letterSpacing: -0.2,
+  },
+
+  meta: {
+    marginTop: 5,
+    color: '#6d6d72',
+    fontSize: 13,
+    textTransform: 'capitalize',
+  },
+
+  statusBadge: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 999,
+    backgroundColor: '#e5e5ea',
+  },
+  statusCaught: {
+    backgroundColor: '#22C55E',
+  },
+  
+  statusDead: {
+    backgroundColor: '#EF4444',
+  },
+  
+  statusFailed: {
+    backgroundColor: '#F59E0B',
+  },
+  
+  statusEmpty: {
+    backgroundColor: '#FFFFFF',
+  },
+  
+  statusText: {
+    fontSize: 12,
+    fontWeight: '800',
+    color: '#111827',
+  },
+  
+  statusTextActive: {
+    color: '#FFFFFF',
+  },
+
   encounterRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: 14,
   },
+
+  spriteBox: {
+    width: 48,
+    height: 48,
+    borderRadius: 14,
+    backgroundColor: '#f2f2f7',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+
   sprite: {
-    width: 40,
-    height: 40,
-    marginRight: 8,
+    width: 42,
+    height: 42,
   },
-  encounter: {
+
+  encounterName: {
+    fontSize: 17,
+    fontWeight: '800',
+    textTransform: 'capitalize',
+  },
+
+  encounterMeta: {
+    marginTop: 3,
+    color: '#6d6d72',
+    fontSize: 13,
+  },
+
+  emptyBox: {
+    marginTop: 14,
+    backgroundColor: '#f2f2f7',
+    padding: 12,
+    borderRadius: 14,
+  },
+
+  emptyText: {
+    color: '#6d6d72',
     fontWeight: '600',
-  },
-  empty: {
-    marginTop: 8,
-    color: '#999',
   },
 });

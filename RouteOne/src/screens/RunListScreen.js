@@ -80,6 +80,8 @@ export default function RunListScreen({ navigation }) {
 
   const selectStarter = async (starter) => {
     await AsyncStorage.removeItem('encounters');
+    await AsyncStorage.removeItem('defeatedBosses');
+
     await AsyncStorage.setItem('starter', starter.id);
 
     setStarterModalVisible(false);
@@ -95,22 +97,27 @@ export default function RunListScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.appTitle}>Route One</Text>
-      <Text style={styles.subtitle}>Nuzlocke run tracker</Text>
+      <Text style={styles.subtitle}>Track your FireRed Nuzlocke run</Text>
 
-      <View style={styles.menuSection}>
-        <Pressable style={styles.menuCard} onPress={openRun}>
-          <Text style={styles.menuTitle}>Continue Run</Text>
-          <Text style={styles.menuText}>Pokémon FireRed</Text>
+      <View style={styles.heroCard}>
+        <Text style={styles.heroLabel}>Current Run</Text>
+        <Text style={styles.heroTitle}>Pokémon FireRed</Text>
+        <Text style={styles.heroText}>Continue your active Kanto journey.</Text>
+
+        <Pressable style={styles.primaryButton} onPress={openRun}>
+          <Text style={styles.primaryButtonText}>Continue Run</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.actionRow}>
+        <Pressable style={styles.actionCard} onPress={startNewRun}>
+          <Text style={styles.actionTitle}>New Run</Text>
+          <Text style={styles.actionText}>Choose starter</Text>
         </Pressable>
 
-        <Pressable style={styles.menuCard} onPress={startNewRun}>
-          <Text style={styles.menuTitle}>New Run</Text>
-          <Text style={styles.menuText}>Choose starter and start a new run</Text>
-        </Pressable>
-
-        <Pressable style={[styles.menuCard, styles.disabledCard]} disabled>
-          <Text style={styles.menuTitle}>Load Run</Text>
-          <Text style={styles.menuText}>Coming soon</Text>
+        <Pressable style={[styles.actionCard, styles.disabledCard]} disabled>
+          <Text style={styles.actionTitle}>Load Run</Text>
+          <Text style={styles.actionText}>Coming soon</Text>
         </Pressable>
       </View>
 
@@ -122,12 +129,14 @@ export default function RunListScreen({ navigation }) {
         contentContainerStyle={styles.list}
         renderItem={({ item }) => (
           <Pressable
-            style={[styles.card, !item.available && styles.disabledCard]}
+            style={[styles.gameCard, !item.available && styles.disabledGameCard]}
             onPress={() => openGame(item)}
             disabled={!item.available}
           >
             <View style={styles.leftContent}>
-              <Image source={{ uri: item.image }} style={styles.image} />
+              <View style={styles.imageBox}>
+                <Image source={{ uri: item.image }} style={styles.image} />
+              </View>
 
               <View>
                 <Text style={styles.gameName}>{item.name}</Text>
@@ -152,9 +161,11 @@ export default function RunListScreen({ navigation }) {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalBox}>
+            <View style={styles.modalHandle} />
+
             <Text style={styles.modalTitle}>Choose your starter</Text>
             <Text style={styles.modalText}>
-              This changes Champion Blue’s final team.
+              This also changes Champion Blue’s final team.
             </Text>
 
             {starters.map((starter) => (
@@ -188,48 +199,94 @@ export default function RunListScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#f2f2f7',
     paddingTop: 70,
-    paddingHorizontal: 16,
+    paddingHorizontal: 18,
   },
 
   appTitle: {
-    fontSize: 34,
-    fontWeight: '800',
+    fontSize: 36,
+    fontWeight: '900',
+    letterSpacing: -0.8,
   },
 
   subtitle: {
     fontSize: 16,
-    color: '#666',
+    color: '#6d6d72',
     marginTop: 6,
-    marginBottom: 24,
+    marginBottom: 22,
   },
 
-  menuSection: {
-    marginBottom: 24,
-  },
-
-  menuCard: {
+  heroCard: {
     backgroundColor: '#111',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
+    borderRadius: 24,
+    padding: 20,
+    marginBottom: 14,
   },
 
-  menuTitle: {
+  heroLabel: {
+    color: '#aaa',
+    fontSize: 13,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
+  },
+
+  heroTitle: {
     color: '#fff',
-    fontSize: 20,
-    fontWeight: '800',
+    fontSize: 26,
+    fontWeight: '900',
+    marginTop: 8,
   },
 
-  menuText: {
+  heroText: {
     color: '#ccc',
+    marginTop: 6,
+    marginBottom: 16,
+  },
+
+  primaryButton: {
+    backgroundColor: '#fff',
+    borderRadius: 14,
+    paddingVertical: 13,
+    alignItems: 'center',
+  },
+
+  primaryButtonText: {
+    color: '#111',
+    fontWeight: '900',
+  },
+
+  actionRow: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 24,
+  },
+
+  actionCard: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderRadius: 18,
+    padding: 16,
+  },
+
+  actionTitle: {
+    fontSize: 17,
+    fontWeight: '900',
+  },
+
+  actionText: {
+    color: '#6d6d72',
     marginTop: 4,
+  },
+
+  disabledCard: {
+    opacity: 0.45,
   },
 
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '800',
+    fontWeight: '900',
     marginBottom: 12,
   },
 
@@ -237,18 +294,18 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
 
-  card: {
+  gameCard: {
     backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 16,
+    borderRadius: 18,
+    padding: 14,
     marginBottom: 12,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
 
-  disabledCard: {
-    opacity: 0.4,
+  disabledGameCard: {
+    opacity: 0.45,
   },
 
   leftContent: {
@@ -256,30 +313,39 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  image: {
-    width: 52,
-    height: 52,
+  imageBox: {
+    width: 54,
+    height: 54,
+    borderRadius: 16,
+    backgroundColor: '#f2f2f7',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginRight: 14,
   },
 
+  image: {
+    width: 38,
+    height: 38,
+  },
+
   gameName: {
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: 17,
+    fontWeight: '800',
   },
 
   gameSubtitle: {
     marginTop: 4,
-    color: '#666',
+    color: '#6d6d72',
   },
 
   openBadge: {
-    fontWeight: '800',
+    fontWeight: '900',
     color: '#111',
     fontSize: 12,
   },
 
   comingSoon: {
-    fontWeight: '800',
+    fontWeight: '900',
     color: '#777',
     fontSize: 12,
   },
@@ -291,26 +357,35 @@ const styles = StyleSheet.create({
   },
 
   modalBox: {
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#f2f2f7',
     padding: 20,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+  },
+
+  modalHandle: {
+    width: 42,
+    height: 5,
+    borderRadius: 999,
+    backgroundColor: '#c7c7cc',
+    alignSelf: 'center',
+    marginBottom: 16,
   },
 
   modalTitle: {
-    fontSize: 24,
-    fontWeight: '800',
+    fontSize: 25,
+    fontWeight: '900',
   },
 
   modalText: {
-    color: '#666',
+    color: '#6d6d72',
     marginTop: 6,
     marginBottom: 16,
   },
 
   starterCard: {
     backgroundColor: '#fff',
-    borderRadius: 16,
+    borderRadius: 18,
     padding: 14,
     marginBottom: 10,
     flexDirection: 'row',
@@ -325,11 +400,11 @@ const styles = StyleSheet.create({
 
   starterName: {
     fontSize: 18,
-    fontWeight: '800',
+    fontWeight: '900',
   },
 
   starterText: {
-    color: '#666',
+    color: '#6d6d72',
     marginTop: 4,
   },
 
@@ -340,7 +415,7 @@ const styles = StyleSheet.create({
   },
 
   cancelText: {
-    fontWeight: '800',
+    fontWeight: '900',
     color: '#111',
   },
 });

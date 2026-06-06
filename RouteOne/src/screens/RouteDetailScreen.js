@@ -3,7 +3,6 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  Button,
   Pressable,
   Image,
   Share,
@@ -63,33 +62,45 @@ export default function RouteDetailScreen({ route }) {
 
       const searchName = pokemonName.trim().toLowerCase();
 
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${searchName}`
+      const selectedAvailablePokemon = availablePokemon.find(
+        (pokemon) => pokemon.name.toLowerCase() === searchName
       );
-
-      if (!response.ok) {
-        setError('Pokémon not found. Check the name and try again.');
-        return;
-      }
-
-      const pokemonData = await response.json();
 
       const data = await AsyncStorage.getItem(STORAGE_KEY);
       const parsed = data ? JSON.parse(data) : {};
 
-      const newEncounter = {
-        pokemon: pokemonData.name,
-        pokemonId: pokemonData.id,
-        status: status,
-        sprite: pokemonData.sprites.front_default,
-      };
+      let newEncounter;
+
+      if (selectedAvailablePokemon) {
+        newEncounter = {
+          pokemon: selectedAvailablePokemon.name,
+          pokemonId: selectedAvailablePokemon.pokemonId,
+          status: status,
+          sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selectedAvailablePokemon.pokemonId}.png`,
+        };
+      } else {
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${searchName}`
+        );
+
+        if (!response.ok) {
+          setError('Pokémon not found. Check the name and try again.');
+          return;
+        }
+
+        const pokemonData = await response.json();
+
+        newEncounter = {
+          pokemon: pokemonData.name,
+          pokemonId: pokemonData.id,
+          status: status,
+          sprite: pokemonData.sprites.front_default,
+        };
+      }
 
       parsed[routeItem.id] = newEncounter;
 
-      await AsyncStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(parsed)
-      );
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
 
       setEncounter(newEncounter);
       setPokemonName('');
@@ -116,10 +127,7 @@ export default function RouteDetailScreen({ route }) {
 
       parsed[routeItem.id] = updatedEncounter;
 
-      await AsyncStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(parsed)
-      );
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
 
       setEncounter(updatedEncounter);
     } catch (e) {
@@ -139,17 +147,23 @@ export default function RouteDetailScreen({ route }) {
     }
   };
 
+  const getStatusActiveStyle = (selectedStatus, item) => {
+    if (selectedStatus !== item) return null;
+
+    if (item === 'caught') return styles.statusButtonCaughtActive;
+    if (item === 'dead') return styles.statusButtonDeadActive;
+    if (item === 'failed') return styles.statusButtonFailedActive;
+
+    return null;
+  };
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={styles.title}>{routeItem.name}</Text>
 
-      <Text style={styles.meta}>
-        {routeItem.types.join(', ')}
-      </Text>
+      <Text style={styles.meta}>{routeItem.types.join(', ')}</Text>
 
-      <Text style={styles.sectionTitle}>
-        Available Pokémon
-      </Text>
+      <Text style={styles.sectionTitle}>Available Pokémon</Text>
 
       <View style={styles.availableBox}>
         {availablePokemon.length > 0 ? (
@@ -159,16 +173,16 @@ export default function RouteDetailScreen({ route }) {
               style={styles.availableRow}
               onPress={() => setPokemonName(pokemon.name)}
             >
-              <Image
-                source={{
-                  uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonId}.png`,
-                }}
-                style={styles.availableSprite}
-              />
+              <View style={styles.availableSpriteBox}>
+                <Image
+                  source={{
+                    uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonId}.png`,
+                  }}
+                  style={styles.availableSprite}
+                />
+              </View>
 
-              <Text style={styles.availablePokemon}>
-                {pokemon.name}
-              </Text>
+              <Text style={styles.availablePokemon}>{pokemon.name}</Text>
             </Pressable>
           ))
         ) : (
@@ -178,17 +192,18 @@ export default function RouteDetailScreen({ route }) {
         )}
       </View>
 
+      <Text style={styles.sectionTitle}>Register Encounter</Text>
+
       <TextInput
         style={styles.input}
         placeholder="Enter Pokémon name"
+        placeholderTextColor="#9CA3AF"
         value={pokemonName}
         onChangeText={setPokemonName}
         autoCapitalize="none"
       />
 
-      {error ? (
-        <Text style={styles.error}>{error}</Text>
-      ) : null}
+      {error ? <Text style={styles.error}>{error}</Text> : null}
 
       <Text style={styles.label}>Status</Text>
 
@@ -198,16 +213,14 @@ export default function RouteDetailScreen({ route }) {
             key={item}
             style={[
               styles.statusButton,
-              status === item &&
-                styles.statusButtonActive,
+              getStatusActiveStyle(status, item),
             ]}
             onPress={() => setStatus(item)}
           >
             <Text
               style={[
                 styles.statusText,
-                status === item &&
-                  styles.statusTextActive,
+                status === item && styles.statusTextActive,
               ]}
             >
               {item}
@@ -216,71 +229,57 @@ export default function RouteDetailScreen({ route }) {
         ))}
       </View>
 
-      <Button
-        title={loading ? 'Saving...' : 'Save Encounter'}
+      <Pressable
+        style={[styles.saveButton, loading && styles.saveButtonDisabled]}
         onPress={addEncounter}
         disabled={loading}
-      />
+      >
+        <Text style={styles.saveButtonText}>
+          {loading ? 'Saving...' : 'Save Encounter'}
+        </Text>
+      </Pressable>
 
       {encounter && (
         <View style={styles.resultBox}>
-          <Text style={styles.resultTitle}>
-            Current encounter
-          </Text>
+          <Text style={styles.resultTitle}>Current encounter</Text>
 
           {encounter.sprite && (
-            <Image
-              source={{ uri: encounter.sprite }}
-              style={styles.sprite}
-            />
+            <View style={styles.bigSpriteBox}>
+              <Image source={{ uri: encounter.sprite }} style={styles.sprite} />
+            </View>
           )}
 
-          <Text style={styles.result}>
-            Pokémon: {encounter.pokemon}
-          </Text>
+          <Text style={styles.result}>Pokémon: {encounter.pokemon}</Text>
 
-          <Text style={styles.result}>
-            Status: {encounter.status}
-          </Text>
+          <Text style={styles.result}>Status: {encounter.status}</Text>
 
-          <View style={styles.shareButton}>
-            <Button
-              title="Share Encounter"
-              onPress={shareEncounter}
-            />
-          </View>
+          <Pressable style={styles.secondaryButton} onPress={shareEncounter}>
+            <Text style={styles.secondaryButtonText}>Share Encounter</Text>
+          </Pressable>
 
           <View style={styles.quickActions}>
-            <Text style={styles.label}>
-              Update status
-            </Text>
+            <Text style={styles.label}>Update status</Text>
 
             <View style={styles.statusRow}>
-              {['caught', 'dead', 'failed'].map(
-                (item) => (
-                  <Pressable
-                    key={item}
+              {['caught', 'dead', 'failed'].map((item) => (
+                <Pressable
+                  key={item}
+                  style={[
+                    styles.statusButton,
+                    getStatusActiveStyle(encounter.status, item),
+                  ]}
+                  onPress={() => updateEncounterStatus(item)}
+                >
+                  <Text
                     style={[
-                      styles.statusButton,
-                      encounter.status === item &&
-                        styles.statusButtonActive,
+                      styles.statusText,
+                      encounter.status === item && styles.statusTextActive,
                     ]}
-                    onPress={() =>
-                      updateEncounterStatus(item)
-                    }
                   >
-                    <Text
-                      style={[
-                        styles.statusText,
-                        encounter.status === item &&
-                          styles.statusTextActive,
-                      ]}
-                    >
-                      {item}
-                    </Text>
-                  </Pressable>
-                )
-              )}
+                    {item}
+                  </Text>
+                </Pressable>
+              ))}
             </View>
           </View>
         </View>
@@ -293,67 +292,85 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#A7F3D0',
   },
 
   title: {
-    fontSize: 28,
-    fontWeight: '700',
-    marginBottom: 8,
+    fontSize: 32,
+    fontWeight: '900',
+    letterSpacing: -0.6,
+    marginBottom: 6,
+    color: '#111827',
   },
 
   meta: {
-    color: '#666',
-    marginBottom: 20,
+    color: '#374151',
+    marginBottom: 22,
+    textTransform: 'capitalize',
+    fontWeight: '600',
   },
 
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '700',
-    marginBottom: 8,
+    fontWeight: '900',
+    marginBottom: 10,
+    color: '#111827',
   },
 
   availableBox: {
     backgroundColor: '#fff',
     padding: 14,
-    borderRadius: 12,
-    marginBottom: 20,
+    borderRadius: 18,
+    marginBottom: 22,
   },
 
   availableRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 6,
-    paddingVertical: 4,
+    marginBottom: 8,
+    paddingVertical: 5,
+  },
+
+  availableSpriteBox: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    backgroundColor: '#F0FDF4',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
   },
 
   availableSprite: {
-    width: 40,
-    height: 40,
-    marginRight: 10,
+    width: 38,
+    height: 38,
   },
 
   availablePokemon: {
     fontSize: 16,
+    fontWeight: '700',
     textTransform: 'capitalize',
+    color: '#111827',
   },
 
   input: {
     backgroundColor: '#fff',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 8,
+    padding: 14,
+    borderRadius: 16,
+    marginBottom: 10,
+    fontSize: 16,
   },
 
   error: {
-    color: '#b00020',
+    color: '#B91C1C',
     marginBottom: 12,
-    fontWeight: '600',
+    fontWeight: '700',
   },
 
   label: {
-    fontWeight: '700',
+    fontWeight: '900',
     marginBottom: 8,
+    color: '#111827',
   },
 
   statusRow: {
@@ -365,20 +382,30 @@ const styles = StyleSheet.create({
   statusButton: {
     backgroundColor: '#fff',
     paddingVertical: 10,
-    paddingHorizontal: 14,
+    paddingHorizontal: 15,
     borderRadius: 999,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#D1D5DB',
   },
 
-  statusButtonActive: {
-    backgroundColor: '#111',
-    borderColor: '#111',
+  statusButtonCaughtActive: {
+    backgroundColor: '#22C55E',
+    borderColor: '#22C55E',
+  },
+
+  statusButtonDeadActive: {
+    backgroundColor: '#EF4444',
+    borderColor: '#EF4444',
+  },
+
+  statusButtonFailedActive: {
+    backgroundColor: '#F59E0B',
+    borderColor: '#F59E0B',
   },
 
   statusText: {
-    color: '#111',
-    fontWeight: '600',
+    color: '#111827',
+    fontWeight: '800',
     textTransform: 'capitalize',
   },
 
@@ -386,36 +413,74 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
+  saveButton: {
+    backgroundColor: '#166534',
+    padding: 15,
+    borderRadius: 16,
+    alignItems: 'center',
+  },
+
+  saveButtonDisabled: {
+    opacity: 0.55,
+  },
+
+  saveButtonText: {
+    color: '#fff',
+    fontWeight: '900',
+    fontSize: 16,
+  },
+
   resultBox: {
     marginTop: 24,
     marginBottom: 40,
     backgroundColor: '#fff',
-    padding: 14,
-    borderRadius: 12,
+    padding: 16,
+    borderRadius: 18,
   },
 
   resultTitle: {
-    fontWeight: '700',
-    marginBottom: 8,
+    fontWeight: '900',
+    marginBottom: 10,
+    fontSize: 18,
+  },
+
+  bigSpriteBox: {
+    width: 108,
+    height: 108,
+    borderRadius: 24,
+    backgroundColor: '#F0FDF4',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
   },
 
   sprite: {
     width: 96,
     height: 96,
-    marginBottom: 8,
   },
 
   result: {
     fontSize: 16,
     marginBottom: 4,
     textTransform: 'capitalize',
+    fontWeight: '700',
+    color: '#111827',
   },
 
-  shareButton: {
+  secondaryButton: {
     marginTop: 16,
+    backgroundColor: '#F0FDF4',
+    padding: 13,
+    borderRadius: 14,
+    alignItems: 'center',
+  },
+
+  secondaryButtonText: {
+    color: '#166534',
+    fontWeight: '900',
   },
 
   quickActions: {
-    marginTop: 16,
+    marginTop: 18,
   },
 });
