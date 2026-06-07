@@ -11,6 +11,7 @@ import {
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Animated, { FadeInDown, ZoomIn } from 'react-native-reanimated';
 
 const games = [
   {
@@ -112,7 +113,6 @@ export default function RunListScreen({ navigation }) {
 
   const openRun = () => {
     if (!hasRun) return;
-
     navigation.navigate('AppDrawer');
   };
 
@@ -151,8 +151,12 @@ export default function RunListScreen({ navigation }) {
       <Text style={styles.appTitle}>Route One</Text>
       <Text style={styles.subtitle}>Track your FireRed Nuzlocke run</Text>
 
-      <View style={styles.heroCard}>
+      <Animated.View
+        entering={FadeInDown.duration(700)}
+        style={styles.heroCard}
+      >
         <Text style={styles.heroLabel}>Current Run</Text>
+
         <Text style={styles.heroTitle}>
           {hasRun ? 'Pokémon FireRed' : 'No run started'}
         </Text>
@@ -165,12 +169,16 @@ export default function RunListScreen({ navigation }) {
 
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Caught</Text>
-            <Text style={styles.summaryValue}>{hasRun ? caughtCount : '-'}</Text>
+            <Text style={styles.summaryValue}>
+              {hasRun ? caughtCount : '-'}
+            </Text>
           </View>
 
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Gyms</Text>
-            <Text style={styles.summaryValue}>{hasRun ? gymsDefeated : '-'}</Text>
+            <Text style={styles.summaryValue}>
+              {hasRun ? gymsDefeated : '-'}
+            </Text>
           </View>
         </View>
 
@@ -191,7 +199,7 @@ export default function RunListScreen({ navigation }) {
             {hasRun ? 'Continue Run' : 'Start a New Run First'}
           </Text>
         </Pressable>
-      </View>
+      </Animated.View>
 
       <View style={styles.actionRow}>
         <Pressable style={styles.actionCard} onPress={startNewRun}>
@@ -206,7 +214,13 @@ export default function RunListScreen({ navigation }) {
         </Pressable>
       </View>
 
-      <Text style={styles.sectionTitle}>Supported games</Text>
+      <Animated.View
+        entering={ZoomIn.duration(600)}
+      >
+      <Text style={styles.sectionTitle}>
+       Supported games
+      </Text> 
+      </Animated.View>
 
       <FlatList
         data={games}
@@ -231,9 +245,7 @@ export default function RunListScreen({ navigation }) {
             </View>
 
             {item.available ? (
-              <Text style={styles.openBadge}>
-                {hasRun ? 'OPEN' : 'START'}
-              </Text>
+              <Text style={styles.openBadge}>{hasRun ? 'OPEN' : 'START'}</Text>
             ) : (
               <Text style={styles.comingSoon}>SOON</Text>
             )}
