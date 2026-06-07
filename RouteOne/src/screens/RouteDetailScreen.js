@@ -20,6 +20,7 @@ export default function RouteDetailScreen({ route }) {
   const [pokemonName, setPokemonName] = useState('');
   const [status, setStatus] = useState('caught');
   const [encounter, setEncounter] = useState(null);
+  const [ownedPokemon, setOwnedPokemon] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -37,17 +38,30 @@ export default function RouteDetailScreen({ route }) {
   const loadEncounter = async () => {
     try {
       const data = await AsyncStorage.getItem(STORAGE_KEY);
+      const starter = await AsyncStorage.getItem('starter');
 
-      if (data) {
-        const parsed = JSON.parse(data);
+      const parsed = data ? JSON.parse(data) : {};
 
-        if (parsed[routeItem.id]) {
-          setEncounter(parsed[routeItem.id]);
-        }
+      if (parsed[routeItem.id]) {
+        setEncounter(parsed[routeItem.id]);
       }
+
+      const owned = Object.values(parsed)
+        .filter((item) => item.status === 'caught' || item.status === 'dead')
+        .map((item) => item.pokemon?.toLowerCase());
+
+      if (starter) {
+        owned.push(starter.toLowerCase());
+      }
+
+      setOwnedPokemon(owned);
     } catch (e) {
       console.log('Error loading encounter', e);
     }
+  };
+
+  const isOwned = (name) => {
+    return ownedPokemon.includes(name.toLowerCase());
   };
 
   const addEncounter = async () => {
@@ -105,6 +119,8 @@ export default function RouteDetailScreen({ route }) {
       setEncounter(newEncounter);
       setPokemonName('');
       setStatus('caught');
+
+      loadEncounter();
     } catch (e) {
       console.log('Error saving encounter', e);
       setError('Something went wrong while saving the encounter.');
@@ -130,6 +146,7 @@ export default function RouteDetailScreen({ route }) {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
 
       setEncounter(updatedEncounter);
+      loadEncounter();
     } catch (e) {
       console.log('Error updating status', e);
     }
@@ -167,24 +184,39 @@ export default function RouteDetailScreen({ route }) {
 
       <View style={styles.availableBox}>
         {availablePokemon.length > 0 ? (
-          availablePokemon.map((pokemon) => (
-            <Pressable
-              key={pokemon.pokemonId}
-              style={styles.availableRow}
-              onPress={() => setPokemonName(pokemon.name)}
-            >
-              <View style={styles.availableSpriteBox}>
-                <Image
-                  source={{
-                    uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonId}.png`,
-                  }}
-                  style={styles.availableSprite}
-                />
-              </View>
+          availablePokemon.map((pokemon) => {
+            const duplicate = isOwned(pokemon.name);
 
-              <Text style={styles.availablePokemon}>{pokemon.name}</Text>
-            </Pressable>
-          ))
+            return (
+              <Pressable
+                key={pokemon.pokemonId}
+                style={styles.availableRow}
+                onPress={() => setPokemonName(pokemon.name)}
+              >
+                <View style={styles.availableSpriteBox}>
+                  <Image
+                    source={{
+                      uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonId}.png`,
+                    }}
+                    style={styles.availableSprite}
+                  />
+                </View>
+
+                <View style={styles.availableInfo}>
+                  <Text style={styles.availablePokemon}>{pokemon.name}</Text>
+
+                  <Text
+                    style={[
+                      styles.duplicateText,
+                      duplicate ? styles.ownedText : styles.notOwnedText,
+                    ]}
+                  >
+                    {duplicate ? '✓ Already owned' : '✗ Not owned'}
+                  </Text>
+                </View>
+              </Pressable>
+            );
+          })
         ) : (
           <Text style={styles.availablePokemon}>
             No encounter data available.
@@ -327,7 +359,7 @@ const styles = StyleSheet.create({
   availableRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 10,
     paddingVertical: 5,
   },
 
@@ -346,11 +378,29 @@ const styles = StyleSheet.create({
     height: 38,
   },
 
+  availableInfo: {
+    flex: 1,
+  },
+
   availablePokemon: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '800',
     textTransform: 'capitalize',
     color: '#111827',
+  },
+
+  duplicateText: {
+    marginTop: 3,
+    fontSize: 13,
+    fontWeight: '800',
+  },
+
+  ownedText: {
+    color: '#16A34A',
+  },
+
+  notOwnedText: {
+    color: '#DC2626',
   },
 
   input: {
